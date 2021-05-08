@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng build && serve -s dist/world-stetic-app",
     "start1": "ng serve",
     "start2": "serve -s dist/world-stetic-app",
     "build": "ng build",
