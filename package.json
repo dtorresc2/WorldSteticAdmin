@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "serve -s dist/world-stetic-app",
+    "start": "node server.ks",
     "start1": "ng serve",
-    "start2": "node server.js",
+    "start2": "serve -s dist/world-stetic-app",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
