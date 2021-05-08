@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-2">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/inicio">World Stetic Admin</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
@@ -8,11 +8,6 @@
   
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav me-auto">
-          <!-- <li class="nav-item">
-            <a class="nav-link active" href="#">Home
-              <span class="visually-hidden">(current)</span>
-            </a>
-          </li> -->
           <li class="nav-item">
             <a class="nav-link" routerLink="/inicio" routerLinkActive="active">Inicio</a>
           </li>
@@ -20,46 +15,25 @@
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" routerLink="/catalogos" role="button" aria-haspopup="true"
               aria-expanded="false">Catalogos</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Clientes</a>
+              <a class="dropdown-item"  routerLink="/catalogos/clientes" routerLinkActive="active">Clientes</a>
               <a class="dropdown-item" href="#">Usuarios</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Servicios</a>
             </div>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" routerLink="/catalogos" routerLinkActive="active">Catalogos</a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li> -->
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-              aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/facturas" routerLinkActive="active">Facturas</a>
+          </li>
         </ul>
         <ul class="navbar-nav ml-auto mr-4">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" routerLink="/catalogos" role="button" aria-haspopup="true"
-              aria-expanded="false">Username</a>
+              aria-expanded="false">Usuario</a>
             <div class="dropdown-menu dropdown-left-manual">
-              <a class="dropdown-item" href="#">Clientes</a>
-              <a class="dropdown-item" href="#">Usuarios</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Servicios</a>
+              <a class="dropdown-item" routerLink="/cerrar">Cerrar Sesion</a>
             </div>
           </li>
         </ul>
-        <!-- <form class="d-flex">
-          <input class="form-control me-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
       </div>
     </div>
   </nav>

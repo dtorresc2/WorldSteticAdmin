@@ -15,6 +15,11 @@ const routes: Routes = [
   {
     path: 'catalogos',
     loadChildren: () => import('./routes/catalogos/catalogos.module').then(m => m.CatalogosModule)
+  },
+  {
+    path: '**',
+    redirectTo: '/inicio',
+    pathMatch: 'full'
   }
 ];
 
