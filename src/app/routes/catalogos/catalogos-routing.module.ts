@@ -25,7 +25,7 @@ const routes: Routes = [
         component: FormClientesComponent
       },
       {
-        path: 'ver/:id',
+        path: ':id/editar',
         component: FormClientesComponent
       }
     ]

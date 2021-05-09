@@ -8,16 +8,22 @@
     <div class="col-md-12">
         <div class="card border-light mb-3">
             <div class="card-header"><i class="fas fa-users" style="margin-right: 1%;"></i>
-                Listado de Clientes<a class="btn btn-link btn-sm" ngbTooltip="Actualizar"><i class="fas fa-sync-alt"></i></a>
+                Listado de Clientes<a class="btn btn-link btn-sm" ngbTooltip="Actualizar"><i
+                        class="fas fa-sync-alt"></i></a>
+
+                <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="crearCliente()">
+                    <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Cliente
+                </button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th colspan="6">
-                                    <ngb-pagination [collectionSize]="clientes.length" [(page)]="page" [maxSize]="10" [rotate]="true"
-                                    [ellipses]="false" [boundaryLinks]="true" size="sm" class="d-flex justify-content-end"></ngb-pagination>                
+                                    <ngb-pagination [collectionSize]="clientes.length" [(page)]="page" [maxSize]="10"
+                                        [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
+                                        class="d-flex justify-content-end"></ngb-pagination>
                                 </th>
                             </tr>
                         </thead>
@@ -28,11 +34,12 @@
                                 <th>NIT</th>
                                 <th>Saldo</th>
                                 <th>Estado</th>
-                                <th style="width: 90px;">Acciones</th>
+                                <th style="width: 120px;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let cliente of clientes | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <tr
+                                *ngFor="let cliente of clientes | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>{{cliente.ID}}</td>
                                 <td>{{cliente.NOMBRE}}</td>
                                 <td>{{cliente.NIT}}</td>
@@ -43,13 +50,26 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <button type="button" class="btn btn-primary btn-sm pb-1" ngbTooltip="Editar">
+                                        <button type="button" class="btn btn-primary btn-sm pb-sm" ngbTooltip="Editar"
+                                            (click)="editarCliente(cliente.ID)">
                                             <i class="fas fa-pen "></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar">
+                                            <i class="fas fa-trash "></i>
                                         </button>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="6">
+                                    <ngb-pagination [collectionSize]="clientes.length" [(page)]="page" [maxSize]="10"
+                                        [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
+                                        class="d-flex justify-content-end"></ngb-pagination>
+                                </th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
