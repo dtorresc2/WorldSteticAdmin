@@ -1,1 +1,45 @@
-<p>lista-clientes works!</p>
+<ol class="breadcrumb bg-light">
+    <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+    <li class="breadcrumb-item"><a routerLink="/catalogos">Catalogos</a></li>
+    <li class="breadcrumb-item active">Clientes</li>
+</ol>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card border-light mb-3">
+            <div class="card-header"><i class="fas fa-users" style="margin-right: 1%;"></i>Listado de Clientes</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>NIT</th>
+                                <th>Saldo</th>
+                                <th>Estado</th>
+                                <th style="width: 90px;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <th>Diego Torres</th>
+                                <td>12323123</td>
+                                <td>12.40</td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td>
+                                    <div>
+                                        <button type="button" class="btn btn-primary btn-sm pb-1" ngbTooltip="Editar">
+                                            <i class="fas fa-pen "></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
