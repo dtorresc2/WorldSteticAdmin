@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaClientesComponent implements OnInit {
   clientes = [];
+  // Paginacion
+  page = 1;
+  pageSize = 10;
+
   constructor() { }
 
   ngOnInit(): void {

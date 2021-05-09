@@ -8,12 +8,19 @@
     <div class="col-md-12">
         <div class="card border-light mb-3">
             <div class="card-header"><i class="fas fa-users" style="margin-right: 1%;"></i>
-                Listado de Clientes
-                <a class="btn btn-link btn-sm" ngbTooltip="Actualizar"><i class="fas fa-sync-alt"></i></a>
+                Listado de Clientes<a class="btn btn-link btn-sm" ngbTooltip="Actualizar"><i class="fas fa-sync-alt"></i></a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="6">
+                                    <ngb-pagination [collectionSize]="clientes.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+                                    [ellipses]="false" [boundaryLinks]="true" size="sm" class="d-flex justify-content-end"></ngb-pagination>                
+                                </th>
+                            </tr>
+                        </thead>
                         <thead class="table-primary">
                             <tr>
                                 <th>ID</th>
@@ -25,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let cliente of clientes">
+                            <tr *ngFor="let cliente of clientes | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>{{cliente.ID}}</td>
                                 <td>{{cliente.NOMBRE}}</td>
                                 <td>{{cliente.NIT}}</td>
