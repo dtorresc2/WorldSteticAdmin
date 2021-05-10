@@ -8,6 +8,9 @@ import { CatalogosComponent } from './catalogos/catalogos.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
 import { FormsModule } from '@angular/forms';
+import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
+import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
+import { FormUsuariosComponent } from './usuarios/form-usuarios/form-usuarios.component';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { FormsModule } from '@angular/forms';
     ClientesComponent, 
     ListaClientesComponent, 
     FormClientesComponent, 
-    CatalogosComponent
+    CatalogosComponent,
+    UsuariosComponent,
+    ListaUsuariosComponent,
+    FormUsuariosComponent
   ],
   imports: [
     CommonModule,

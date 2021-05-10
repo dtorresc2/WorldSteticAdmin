@@ -5,6 +5,9 @@ import { CatalogosComponent } from './catalogos/catalogos.component';
 import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
 import { ListaClientesComponent } from './clientes/lista-clientes/lista-clientes.component';
+import { FormUsuariosComponent } from './usuarios/form-usuarios/form-usuarios.component';
+import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
+import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 
 
 const routes: Routes = [
@@ -27,6 +30,24 @@ const routes: Routes = [
       {
         path: ':id/editar',
         component: FormClientesComponent
+      }
+    ]
+  },
+  {
+    path: 'usuarios',
+    component: UsuariosComponent,
+    children: [
+      {
+        path: '',
+        component: ListaUsuariosComponent
+      },
+      {
+        path: 'crear',
+        component: FormUsuariosComponent
+      },
+      {
+        path: ':id/editar',
+        component: FormUsuariosComponent
       }
     ]
   },
