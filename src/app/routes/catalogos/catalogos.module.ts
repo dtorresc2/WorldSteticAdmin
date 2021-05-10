@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
 import { FormUsuariosComponent } from './usuarios/form-usuarios/form-usuarios.component';
+import { ServiciosComponent } from './servicios/servicios/servicios.component';
+import { ListaServiciosComponent } from './servicios/lista-servicios/lista-servicios.component';
+import { FormServiciosComponent } from './servicios/form-servicios/form-servicios.component';
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { FormUsuariosComponent } from './usuarios/form-usuarios/form-usuarios.co
     CatalogosComponent,
     UsuariosComponent,
     ListaUsuariosComponent,
-    FormUsuariosComponent
+    FormUsuariosComponent,
+    ServiciosComponent,
+    ListaServiciosComponent,
+    FormServiciosComponent
   ],
   imports: [
     CommonModule,

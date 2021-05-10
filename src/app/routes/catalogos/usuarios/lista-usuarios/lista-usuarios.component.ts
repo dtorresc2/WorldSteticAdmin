@@ -32,6 +32,4 @@ export class ListaUsuariosComponent implements OnInit {
   editarUsuario(id) {
     this.router.navigate(['catalogos/usuarios', id, 'editar']);
   }
-
-
 }
