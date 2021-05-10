@@ -1,1 +1,88 @@
-<p>form-usuarios works!</p>
+<ol class="breadcrumb bg-light">
+   <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+   <li class="breadcrumb-item"><a routerLink="/catalogos">Catalogos</a></li>
+   <li class="breadcrumb-item"><a routerLink="/catalogos/usuarios">Usuarios</a></li>
+   <li *ngIf="!this.modoEdicion" class="breadcrumb-item active">Crear Usuario</li>
+   <li *ngIf="this.modoEdicion" class="breadcrumb-item active">Editar Usuario</li>
+</ol>
+
+<div class="row">
+   <div class="col-md-12">
+      <div class="card border-light mb-3">
+         <div class="card-header"><i class="fas fa-users" style="margin-right: 1%;"></i>
+            Usuario
+
+            <button type="button" class="btn btn-success btn-sm" style="float: right">
+               <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
+            </button>
+
+            <a class="btn btn-primary btn-sm" style="float: right; margin-right: 1%;" routerLink="/catalogos/usuarios">
+               <i class="fas fa-arrow-left" style="padding-right: 3%;"></i> Salir
+            </a>
+         </div>
+         <div class="card-body">
+            <form>
+               <div class="form">
+
+                  <div class="row">
+                     <!-- Nombre -->
+                     <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label>Usuario</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <!-- Direccion -->
+                     <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label>Contraseña</label>
+                           <input type="password" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label>Confirmar Contraseña</label>
+                           <input type="password" class="form-control">
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="row">
+                     <!-- Estado del Usuario -->
+                     <div class="col-md-2">
+                        <div class="form-group mb-3">
+                           <label>Estado</label>
+                           <br>
+                           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                              <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
+                                 checked="">
+                              <label class="btn btn-outline-primary" for="btnradio1">Activado</label>
+                              <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
+                                 checked="">
+                              <label class="btn btn-outline-primary" for="btnradio2">Desactivado</label>
+                           </div>
+                        </div>
+                     </div>
+
+                     <!-- Tipo del Usuario -->
+                     <div class="col-md-2">
+                        <div class="form-group mb-3">
+                           <label>Tipo</label>
+                           <br>
+                           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                              <input type="radio" class="btn-check" name="btnradio1" id="btnradio3" autocomplete="off"
+                                 checked="">
+                              <label class="btn btn-outline-primary" for="btnradio3">Normal</label>
+                              <input type="radio" class="btn-check" name="btnradio1" id="btnradio4" autocomplete="off"
+                                 checked="">
+                              <label class="btn btn-outline-primary" for="btnradio4">Admin</label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
