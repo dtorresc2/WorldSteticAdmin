@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./routes/catalogos/catalogos.module').then(m => m.CatalogosModule)
   },
   {
+    path: 'facturas',
+    loadChildren: () => import('./routes/facturas/facturas.module').then(m => m.FacturasModule)
+  },
+  {
     path: '**',
     redirectTo: '/inicio',
     pathMatch: 'full'
