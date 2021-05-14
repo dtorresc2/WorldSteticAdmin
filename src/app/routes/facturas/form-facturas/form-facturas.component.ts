@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-form-facturas',
@@ -6,8 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-facturas.component.css']
 })
 export class FormFacturasComponent implements OnInit {
+  modoEdicion: boolean = false;
+  ID_FACTURA: any = 0;
+  model: NgbDateStruct;
+  // model: NgbDateStruct;s
 
-  constructor() { }
+  cliente: FormGroup;
+  constructor(
+    private router: Router,
+    private activedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
   }

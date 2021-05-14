@@ -5,3 +5,113 @@
    <li *ngIf="!this.modoEdicion" class="breadcrumb-item active">Crear Factura</li>
    <li *ngIf="this.modoEdicion" class="breadcrumb-item active">Editar Factura</li>
 </ol>
+
+<div class="row">
+   <div class="col-md-12">
+      <div class="card border-light mb-3">
+         <div class="card-header"><i class="fas fa-users" style="margin-right: 1%;"></i>
+            Cliente
+
+            <button type="button" class="btn btn-success btn-sm" style="float: right">
+               <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
+            </button>
+
+            <a class="btn btn-primary btn-sm" style="float: right; margin-right: 1%;" routerLink="/catalogos/clientes">
+               <i class="fas fa-arrow-left" style="padding-right: 3%;"></i> Salir
+            </a>
+         </div>
+         <div class="card-body">
+            <form>
+               <div class="form">
+                  <div class="row">
+                     <!-- Serie -->
+                     <div class="col-md-3">
+                        <div class="form-group mb-3">
+                           <label class="form-label">Serie</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+
+                     <div class="col-md-3">
+                        <div class="form-group mb-3">
+                           <label class="form-label">Numero</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+
+                     <!-- Nombre -->
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label for="exampleSelect1" class="form-label">Cliente</label>
+                           <select class="form-select" id="exampleSelect1">
+                              <option value="1">Diego Torres</option>
+                              <option value="1">Diego Torres</option>
+                              <option value="1">Diego Torres</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="row">
+                     <!-- Nit -->
+                     <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label class="form-label">NIT</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <!-- Telefono -->
+                     <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label class="form-label">Telefono</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <!-- Correo Electronico -->
+                     <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label class="form-label">Direccion</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+
+                  </div>
+
+                  <div class="row">
+                     <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label class="form-label">Fecha</label>
+                           <input type="text" class="form-control" readonly>
+                        </div>
+                     </div>
+
+                     <!-- Saldo de Cliente -->
+                     <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label class="form-label">Saldo</label>
+                           <input type="text" class="form-control" readonly>
+                        </div>
+                     </div>
+
+                     <!-- Estado del Cliente -->
+                     <!-- <div class="col-md-4">
+                        <div class="form-group mb-3">
+                           <label>Estado</label>
+                           <br>
+                           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                              <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
+                                 checked="">
+                              <label class="btn btn-outline-primary" for="btnradio1">Activado</label>
+                              <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
+                                 checked="">
+                              <label class="btn btn-outline-primary" for="btnradio2">Desactivado</label>
+                           </div>
+                        </div>
+                     </div> -->
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
