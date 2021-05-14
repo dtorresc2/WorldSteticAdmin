@@ -21,6 +21,13 @@ export class FormFacturasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const params = this.activedRoute.snapshot.params;
+    if (params.id) {
+      this.modoEdicion = true;
+      this.ID_FACTURA = params.id;
+    }
+    else {
+      this.modoEdicion = false;
+    }
   }
-
 }
