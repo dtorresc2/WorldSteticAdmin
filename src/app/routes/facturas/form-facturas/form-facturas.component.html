@@ -1,1 +1,7 @@
-<p>form-facturas works!</p>
+<ol class="breadcrumb bg-light">
+   <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+   <li class="breadcrumb-item"><a routerLink="/facturas">Facturas</a></li>
+   <!-- <li class="breadcrumb-item"><a routerLink="/catalogos/clientes">Clientes</a></li> -->
+   <li *ngIf="!this.modoEdicion" class="breadcrumb-item active">Crear Factura</li>
+   <li *ngIf="this.modoEdicion" class="breadcrumb-item active">Editar Factura</li>
+</ol>
