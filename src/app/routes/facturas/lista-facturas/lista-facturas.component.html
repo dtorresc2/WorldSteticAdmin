@@ -11,7 +11,7 @@
                   class="fas fa-sync-alt"></i></a>
 
             <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="crearFactura()">
-               <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Cliente
+               <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Factura
             </button>
          </div>
          <div class="card-body">
@@ -56,13 +56,20 @@
                         </td>
                         <td>{{factura.MONTO}}</td>
                         <td>
-                           <div>
-                              <button type="button" class="btn btn-primary btn-sm pb-sm" ngbTooltip="Editar"
+                           <div class="btn-group" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
                                  (click)="editarFactura(factura.ID)">
-                                 <i class="fas fa-pen "></i>
+                                 <i class="fas fa-pen"></i>
                               </button>
-                              <button type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar">
-                                 <i class="fas fa-trash "></i>
+                              <button *ngIf="factura.TIPO_FACTURA == '0'" type="button" class="btn btn-primary btn-sm"
+                                 ngbTooltip="Pagar">
+                                 <i class="fas fa-money-bill-wave"></i>
+                              </button>
+                              <button type="button" class="btn btn-warning btn-sm" ngbTooltip="Anular">
+                                 <i class="fas fa-times"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
+                                 <i class="fas fa-trash"></i>
                               </button>
                            </div>
                         </td>
