@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FacturasComponent } from './facturas/facturas.component';
 import { FormFacturasComponent } from './form-facturas/form-facturas.component';
 import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
+import { MovimientosFacturasComponent } from './movimientos-facturas/movimientos-facturas.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: ':id/editar',
         component: FormFacturasComponent
+      },
+      {
+        path: ':id/movimientos',
+        component: MovimientosFacturasComponent
       }
     ]
   }

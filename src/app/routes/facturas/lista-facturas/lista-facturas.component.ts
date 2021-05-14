@@ -50,4 +50,8 @@ export class ListaFacturasComponent implements OnInit {
     this.router.navigate(['facturas', id, 'editar']);
   }
 
+  verMovimientos(id) {
+    this.router.navigate(['facturas', id, 'movimientos']);
+  }
+
 }
