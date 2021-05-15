@@ -9,13 +9,11 @@
 <div class="row">
    <div class="col-md-12">
       <div class="card border-light mb-3">
-         <div class="card-header"><i class="fas fa-users" style="margin-right: 1%;"></i>
-            Cliente
-
+         <div class="card-header"><i class="fas fa-receipt" style="margin-right: 1%;"></i>
+            Encabezado de Factura
             <button type="button" class="btn btn-success btn-sm" style="float: right">
                <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
             </button>
-
             <a class="btn btn-primary btn-sm" style="float: right; margin-right: 1%;" routerLink="/facturas">
                <i class="fas fa-arrow-left" style="padding-right: 3%;"></i> Salir
             </a>
@@ -104,6 +102,71 @@
                   </div>
                </div>
             </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-md-12">
+      <div class="card border-light mb-3">
+         <div class="card-header pt-2">
+            <div class="row">
+               <div class="col-6">
+                  <i class="fas fa-receipt" style="margin-right: 1%;"></i>
+                  Detalle de Factura
+               </div>
+               <div class="col-6">
+                  <ngb-pagination [collectionSize]="detalleFactura.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+                  [ellipses]="false" [boundaryLinks]="true" size="sm" class="d-flex justify-content-end"></ngb-pagination>
+               </div>
+            </div>
+         </div>
+         <div class="card-body">
+            <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+               <table class="table table-hover">
+                  <thead>
+                     <tr>
+                        <th colspan="9">
+
+                        </th>
+                     </tr>
+                  </thead>
+                  <thead class="table-primary">
+                     <tr>
+                        <th>No.</th>
+                        <th>Codigo</th>
+                        <th>Cantidad</th>
+                        <th>Descripcion</th>
+                        <th>Monto Unitario</th>
+                        <th>Subtotal</th>
+                        <th style="width: 120px;">Acciones</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr
+                        *ngFor="let factura of detalleFactura | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                        <td>{{factura.NUMERO}}</td>
+                        <td>{{factura.CODIGO}}</td>
+                        <td>{{factura.CANTIDAD}}</td>
+                        <td>{{factura.DESCRIPCION}}</td>
+                        <td>{{factura.MONTO_UNITARIO}}</td>
+                        <td>{{factura.MONTO}}</td>
+                        <td>
+                           <div class="btn-group" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
+                                 (click)="editarFactura(factura.ID)">
+                                 <i class="fas fa-pen"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
+                                 <i class="fas fa-trash"></i>
+                              </button>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
          </div>
       </div>
    </div>

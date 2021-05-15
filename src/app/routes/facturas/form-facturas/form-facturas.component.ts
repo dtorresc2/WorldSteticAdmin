@@ -14,6 +14,12 @@ export class FormFacturasComponent implements OnInit {
   model: NgbDateStruct;
   // model: NgbDateStruct;s
 
+  detalleFactura = [];
+  // Paginacion
+  page = 1;
+  pageSize = 5;
+
+
   cliente: FormGroup;
   constructor(
     private router: Router,
@@ -25,6 +31,17 @@ export class FormFacturasComponent implements OnInit {
     if (params.id) {
       this.modoEdicion = true;
       this.ID_FACTURA = params.id;
+
+      for (let i = 0; i < 25; i++) {
+        this.detalleFactura.push({
+          ID: (i + 1),
+          CODIGO: (2 * i),
+          NUMERO: (i + 1),
+          DESCRIPCION: "Servicios 123123",
+          MONTO_UNITARIO: 5.25,
+          MONTO: 25.25,
+        });
+      }
     }
     else {
       this.modoEdicion = false;
