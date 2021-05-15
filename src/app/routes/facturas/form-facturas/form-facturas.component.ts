@@ -37,6 +37,7 @@ export class FormFacturasComponent implements OnInit {
           ID: (i + 1),
           CODIGO: (2 * i),
           NUMERO: (i + 1),
+          CANTIDAD: (i + 3),
           DESCRIPCION: "Servicios 123123",
           MONTO_UNITARIO: 5.25,
           MONTO: 25.25,
