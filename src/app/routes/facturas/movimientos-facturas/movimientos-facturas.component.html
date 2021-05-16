@@ -11,7 +11,8 @@
             Listado de Movimientos<a class="btn btn-link btn-sm" ngbTooltip="Actualizar">
                <i class="fas fa-sync-alt"></i></a>
 
-            <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="crearFactura()">
+            <button type="button" class="btn btn-success btn-sm" style="float: right" data-toggle="modal"
+               data-target="#modalMovimientos">
                <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Movimiento
             </button>
          </div>
@@ -91,13 +92,25 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Movimiento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
          </div>
          <div class="modal-body">
-            ...
+            <form>
+               <div class="form-group">
+                  <label for="exampleSelect1" class="form-label">Movimiento</label>
+                  <select class="form-select" id="exampleSelect1">
+                     <option value="1">Cargo</option>
+                     <option value="0">Abono</option>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="exampleFormControlInput1">Monto</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese Cantidad">
+               </div>
+            </form>
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

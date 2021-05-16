@@ -12,9 +12,8 @@
           <a class="nav-link" routerLink="/inicio" routerLinkActive="active">Inicio</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
-            aria-expanded="false">Catalogos</a>
-          <div class="dropdown-menu">
+          <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="menuCatalogos">Catalogos</a>
+          <div class="dropdown-menu" aria-labelledby="menuCatalogos">
             <a class="dropdown-item" routerLink="/catalogos/clientes" routerLinkActive="active">Clientes</a>
             <a class="dropdown-item" routerLink="/catalogos/usuarios" routerLinkActive="active">Usuarios</a>
             <div class="dropdown-divider"></div>
@@ -24,12 +23,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/facturas" routerLinkActive="active">Facturas</a>
         </li>
+
       </ul>
       <ul class="navbar-nav ml-auto mr-4">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button"
-            aria-haspopup="true" aria-expanded="false">Usuario</a>
-          <div class="dropdown-menu dropdown-left-manual">
+          <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="menuUsuario">Usuario</a>
+          <div class="dropdown-menu dropdown-left-manual" aria-labelledby="menuUsuario">
             <a class="dropdown-item" routerLink="/">Cerrar Sesion</a>
           </div>
         </li>
