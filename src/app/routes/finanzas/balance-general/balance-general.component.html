@@ -11,6 +11,29 @@
             Rango de Fecha
          </div>
          <div class="card-body">
+            <form>
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="form-group mb-3">
+                        <label class="form-label">Fecha Inicial</label>
+                        <input type="date" class="form-control">
+                     </div>
+                  </div>
+                  <!-- Telefono -->
+                  <div class="col-md-4">
+                     <div class="form-group mb-3">
+                        <label class="form-label">Fecha Final</label>
+                        <input type="date" class="form-control">
+                     </div>
+                  </div>
+                  <!-- Correo Electronico -->
+                  <div class="col-md-4">
+                     <button type="button" class="btn btn-primary btn-block" style="float: right; margin-top: 5%;">
+                        <i class="fas fa-search"></i> Consultar
+                     </button>
+                  </div>
+               </div>
+            </form>
          </div>
       </div>
    </div>
@@ -23,7 +46,7 @@
             Listado de Ingresos
          </div>
          <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
                <table class="table table-hover">
                   <thead class="table-primary">
                      <tr>
@@ -32,13 +55,9 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr *ngFor="let servicio of servicios">
-                        <td>{{servicio.DESCRIPCION}}</td>
-                        <td>{{servicio.MONTO}}</td>
-                        <td>
-                           <span *ngIf="servicio.ESTADO == '1'" class="badge bg-success pb-1">Activo</span>
-                           <span *ngIf="servicio.ESTADO == '0'" class="badge bg-danger pb-1">Desactivado</span>
-                        </td>
+                     <tr *ngFor="let ingreso of ingresos">
+                        <td>{{ingreso.DESCRIPCION}}</td>
+                        <td>{{ingreso.MONTO}}</td>
                      </tr>
                   </tbody>
                </table>
@@ -53,7 +72,7 @@
             Listado de Gastos
          </div>
          <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
                <table class="table table-hover">
                   <thead class="table-primary">
                      <tr>
@@ -62,13 +81,9 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr *ngFor="let servicio of servicios">
-                        <td>{{servicio.DESCRIPCION}}</td>
-                        <td>{{servicio.MONTO}}</td>
-                        <td>
-                           <span *ngIf="servicio.ESTADO == '1'" class="badge bg-success pb-1">Activo</span>
-                           <span *ngIf="servicio.ESTADO == '0'" class="badge bg-danger pb-1">Desactivado</span>
-                        </td>
+                     <tr *ngFor="let gasto of gastos">
+                        <td>{{gasto.DESCRIPCION}}</td>
+                        <td>{{gasto.MONTO}}</td>
                      </tr>
                   </tbody>
                </table>
