@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./routes/facturas/facturas.module').then(m => m.FacturasModule)
   },
   {
+    path: 'finanzas',
+    loadChildren: () => import('./routes/finanzas/finanzas.module').then(m => m.FinanzasModule)
+  },
+  {
     path: '**',
     redirectTo: '/inicio',
     pathMatch: 'full'

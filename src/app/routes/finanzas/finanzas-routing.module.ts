@@ -1,8 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BalanceGeneralComponent } from './balance-general/balance-general.component';
+import { FinanzasComponent } from './finanzas/finanzas.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: FinanzasComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'balance'
+      },
+      {
+        path: 'balance',
+        component: BalanceGeneralComponent
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
