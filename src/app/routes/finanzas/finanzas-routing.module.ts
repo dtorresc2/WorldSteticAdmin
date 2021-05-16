@@ -7,17 +7,11 @@ import { FinanzasComponent } from './finanzas/finanzas.component';
 const routes: Routes = [
   {
     path: '',
-    component: FinanzasComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'balance'
-      },
-      {
-        path: 'balance',
-        component: BalanceGeneralComponent
-      }
-    ]
+    component: FinanzasComponent
+  },
+  {
+    path: 'balance',
+    component: BalanceGeneralComponent
   }
 ];
 

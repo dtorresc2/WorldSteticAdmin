@@ -1,1 +1,79 @@
-<p>balance-general works!</p>
+<ol class="breadcrumb bg-light">
+   <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+   <li class="breadcrumb-item"><a routerLink="/finanzas">Finanzas</a></li>
+   <li class="breadcrumb-item active">Balance General</li>
+</ol>
+
+<div class="row">
+   <div class="col-md-12">
+      <div class="card border-light mb-3">
+         <div class="card-header">
+            Rango de Fecha
+         </div>
+         <div class="card-body">
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-md-6">
+      <div class="card border-light mb-3">
+         <div class="card-header">
+            Listado de Ingresos
+         </div>
+         <div class="card-body">
+            <div class="table-responsive">
+               <table class="table table-hover">
+                  <thead class="table-primary">
+                     <tr>
+                        <th>Descripcion</th>
+                        <th>Monto</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let servicio of servicios">
+                        <td>{{servicio.DESCRIPCION}}</td>
+                        <td>{{servicio.MONTO}}</td>
+                        <td>
+                           <span *ngIf="servicio.ESTADO == '1'" class="badge bg-success pb-1">Activo</span>
+                           <span *ngIf="servicio.ESTADO == '0'" class="badge bg-danger pb-1">Desactivado</span>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="col-md-6">
+      <div class="card border-light mb-3">
+         <div class="card-header">
+            Listado de Gastos
+         </div>
+         <div class="card-body">
+            <div class="table-responsive">
+               <table class="table table-hover">
+                  <thead class="table-primary">
+                     <tr>
+                        <th>Descripcion</th>
+                        <th>Monto</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let servicio of servicios">
+                        <td>{{servicio.DESCRIPCION}}</td>
+                        <td>{{servicio.MONTO}}</td>
+                        <td>
+                           <span *ngIf="servicio.ESTADO == '1'" class="badge bg-success pb-1">Activo</span>
+                           <span *ngIf="servicio.ESTADO == '0'" class="badge bg-danger pb-1">Desactivado</span>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
