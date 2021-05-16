@@ -12,7 +12,9 @@ export class ListaFacturasComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     for (let i = 0; i < 25; i++) {

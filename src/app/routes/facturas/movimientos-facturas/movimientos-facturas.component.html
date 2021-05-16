@@ -1,1 +1,90 @@
-<p>movimientos-facturas works!</p>
+<ol class="breadcrumb bg-light">
+   <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+   <li class="breadcrumb-item"><a routerLink="/facturas">Facturas</a></li>
+   <li class="breadcrumb-item active">Movimientos de Factura</li>
+</ol>
+
+<div class="row">
+   <div class="col-md-12">
+      <div class="card border-light mb-3">
+         <div class="card-header"><i class="fas fa-exchange-alt" style="margin-right: 1%;"></i>
+            Listado de Movimientos<a class="btn btn-link btn-sm" ngbTooltip="Actualizar">
+               <i class="fas fa-sync-alt"></i></a>
+
+            <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="crearFactura()">
+               <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Movimiento
+            </button>
+         </div>
+         <div class="card-body">
+            <div class="table-responsive">
+               <table class="table table-hover">
+                  <thead>
+                     <tr>
+                        <th colspan="7">
+                           <ngb-pagination [collectionSize]="movimientos.length" [(page)]="page" [maxSize]="10"
+                              [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
+                              class="d-flex justify-content-end"></ngb-pagination>
+                        </th>
+                     </tr>
+                  </thead>
+                  <thead class="table-primary">
+                     <tr>
+                        <th>Tipo</th>
+                        <th>Numero</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Monto</th>
+                        <th style="width: 120px;">Acciones</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr
+                        *ngFor="let factura of movimientos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                        <td>
+                           <span *ngIf="factura.TIPO_MOVIMIENTO == '1'" class="badge bg-success pb-1">Cargo</span>
+                           <span *ngIf="factura.TIPO_MOVIMIENTO == '0'" class="badge bg-info pb-1">Abono</span>
+                        </td>
+                        <td>{{factura.NUMERO}}</td>
+                        <td>{{factura.NOMBRE}}</td>
+                        <td>{{factura.FECHA}}</td>
+                        <td>
+                           <span *ngIf="factura.ESTADO == '1'" class="badge bg-success pb-1">Activa</span>
+                           <span *ngIf="factura.ESTADO == '0'" class="badge bg-danger pb-1">Anulada</span>
+                        </td>
+                        <td>{{factura.MONTO}}</td>
+                        <td>
+                           <div class="btn-group" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
+                                 (click)="editarFactura(factura.ID)">
+                                 <i class="fas fa-pen"></i>
+                              </button>
+                              <button *ngIf="factura.TIPO_FACTURA == '0'" type="button" class="btn btn-primary btn-sm"
+                                 ngbTooltip="Pagar" (click)="verMovimientos(factura.ID)">
+                                 <i class="fas fa-money-bill-wave"></i>
+                              </button>
+                              <button type="button" class="btn btn-warning btn-sm" ngbTooltip="Anular">
+                                 <i class="fas fa-times"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
+                                 <i class="fas fa-trash"></i>
+                              </button>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                        <th colspan="7">
+                           <ngb-pagination [collectionSize]="movimientos.length" [(page)]="page" [maxSize]="10"
+                              [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
+                              class="d-flex justify-content-end"></ngb-pagination>
+                        </th>
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
