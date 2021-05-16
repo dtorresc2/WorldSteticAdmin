@@ -3,3 +3,99 @@
    <li class="breadcrumb-item"><a routerLink="/finanzas">Finanzas</a></li>
    <li class="breadcrumb-item active">Costos</li>
 </ol>
+
+<div class="row">
+   <div class="col-md-12">
+      <div class="card border-light mb-3">
+         <div class="card-header"><i class="fas fa-wallet" style="margin-right: 1%;"></i>
+            Listado de Costos<a class="btn btn-link btn-sm" ngbTooltip="Actualizar">
+               <i class="fas fa-sync-alt"></i></a>
+
+            <button type="button" class="btn btn-success btn-sm" style="float: right" data-toggle="modal"
+               data-target="#modalCostos">
+               <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Costo
+            </button>
+         </div>
+         <div class="card-body">
+            <div class="table-responsive">
+               <ngb-pagination [collectionSize]="costos.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+                  [ellipses]="false" [boundaryLinks]="true" size="sm" class="d-flex justify-content-end">
+               </ngb-pagination>
+               <table class="table table-hover">
+                  <thead class="table-primary">
+                     <tr>
+                        <th>Fecha</th>
+                        <th>Descripcion</th>
+                        <th>Monto</th>
+                        <th style="width: 120px;">Acciones</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr
+                        *ngFor="let factura of costos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+
+                        <td>{{factura.FECHA}}</td>
+                        <td>{{factura.DESCRIPCION}}</td>
+                        <td>{{factura.MONTO}}</td>
+                        <td>
+                           <div class="btn-group" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
+                                 data-toggle="modal" data-target="#modalCostos">
+                                 <i class="fas fa-pen"></i>
+                              </button>
+                              <button type="button" class="btn btn-warning btn-sm" ngbTooltip="Anular">
+                                 <i class="fas fa-times"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
+                                 <i class="fas fa-trash"></i>
+                              </button>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                        <th colspan="4">
+                           <ngb-pagination [collectionSize]="costos.length" [(page)]="page" [maxSize]="10"
+                              [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
+                              class="d-flex justify-content-end"></ngb-pagination>
+                        </th>
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Modal Costos -->
+<div class="modal fade" id="modalCostos" data-backdrop="static" tabindex="-1" role="dialog"
+   aria-labelledby="staticBackdropLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Costos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form>
+               <div class="form-group">
+                  <label for="exampleFormControlInput1">Descripcion</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese Descripcion">
+               </div>
+               <div class="form-group">
+                  <label for="exampleFormControlInput1">Monto</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese Cantidad">
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Aceptar</button>
+         </div>
+      </div>
+   </div>
+</div>
