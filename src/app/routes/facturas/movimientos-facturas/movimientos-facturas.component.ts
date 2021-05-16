@@ -12,6 +12,8 @@ export class MovimientosFacturasComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
+  closeResult = '';
+
   constructor(
     private router: Router
   ) { }
@@ -39,5 +41,4 @@ export class MovimientosFacturasComponent implements OnInit {
       });
     }
   }
-
 }

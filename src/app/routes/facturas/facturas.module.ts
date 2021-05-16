@@ -6,7 +6,7 @@ import { FacturasComponent } from './facturas/facturas.component';
 import { FormFacturasComponent } from './form-facturas/form-facturas.component';
 import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MovimientosFacturasComponent } from './movimientos-facturas/movimientos-facturas.component';
 
 
@@ -22,6 +22,9 @@ import { MovimientosFacturasComponent } from './movimientos-facturas/movimientos
     NgbModule,
     FormsModule,
     FacturasRoutingModule
+  ],
+  providers: [
+    NgbActiveModal
   ]
 })
 export class FacturasModule { }
