@@ -106,11 +106,11 @@
                 <div class="form-group mb-3">
                   <label>Fecha Nacimiento</label>
                   <input type="date" class="form-control" formControlName="fecha_nacimiento">
+                  <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="cliente.get('fecha_nacimiento').hasError('required') && (cliente.get('fecha_nacimiento').touched || cliente.get('fecha_nacimiento').dirty)">
+                    Fecha requerida
+                  </span>
                 </div>
-                <span class="text-danger" style="font-size: 10px;"
-                  *ngIf="cliente.get('fecha_nacimiento').hasError('required') && (cliente.get('fecha_nacimiento').touched || cliente.get('fecha_nacimiento').dirty)">
-                  Telefono requerido
-                </span>
               </div>
 
               <!-- Saldo de Cliente -->
@@ -127,11 +127,11 @@
                   <label>Estado</label>
                   <br>
                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
-                      formControlName="estado" value="1">
+                    <input type="radio" class="btn-check" id="btnradio1" autocomplete="off" formControlName="estado"
+                      value="1">
                     <label class="btn btn-outline-primary" for="btnradio1">Activado</label>
-                    <input type="radio" class="btn-check" id="btnradio2" autocomplete="off"
-                      formControlName="estado" value="0">
+                    <input type="radio" class="btn-check" id="btnradio2" autocomplete="off" formControlName="estado"
+                      value="0">
                     <label class="btn btn-outline-primary" for="btnradio2">Desactivado</label>
                   </div>
                 </div>
