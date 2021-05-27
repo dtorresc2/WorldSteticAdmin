@@ -21,7 +21,7 @@
         </a>
       </div>
       <div class="card-body">
-        <form>
+        <form [formGroup]="this.cliente">
           <div class="form">
 
             <div class="row">
@@ -29,14 +29,25 @@
               <div class="col-md-6">
                 <div class="form-group mb-3">
                   <label>Nombre</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="nombre" maxlength="100">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                    Max: 100 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="cliente.get('nombre').hasError('required') && (cliente.get('nombre').touched || cliente.get('nombre').dirty)">
+                    Nombre requerido
+                  </span>
                 </div>
               </div>
+
               <!-- Direccion -->
               <div class="col-md-6">
                 <div class="form-group mb-3">
                   <label>Direccion</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="direccion" maxlength="100">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                    Max: 100 caracteres
+                  </span>
                 </div>
               </div>
             </div>
@@ -46,21 +57,44 @@
               <div class="col-md-4">
                 <div class="form-group mb-3">
                   <label>NIT</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="nit" maxlength="10">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                    Max: 10 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="cliente.get('nit').hasError('required') && (cliente.get('nit').touched || cliente.get('nit').dirty)">
+                    Nit requerido
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="cliente.get('nit').hasError('pattern') && (cliente.get('nit').touched || cliente.get('nit').dirty)">
+                    Nit invalido
+                  </span>
                 </div>
               </div>
+
               <!-- Telefono -->
               <div class="col-md-4">
                 <div class="form-group mb-3">
                   <label>Telefono</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="telefono" maxlength="10">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                    Max: 10 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="cliente.get('telefono').hasError('required') && (cliente.get('telefono').touched || cliente.get('telefono').dirty)">
+                    Telefono requerido
+                  </span>
                 </div>
               </div>
+
               <!-- Correo Electronico -->
               <div class="col-md-4">
                 <div class="form-group mb-3">
                   <label>Correo Electronico</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="correo" maxlength="70">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                    Max: 70 caracteres
+                  </span>
                 </div>
               </div>
 
@@ -71,29 +105,19 @@
               <div class="col-md-4">
                 <div class="form-group mb-3">
                   <label>Fecha Nacimiento</label>
-                  <input type="date" class="form-control">
+                  <input type="date" class="form-control" formControlName="fecha_nacimiento">
                 </div>
+                <span class="text-danger" style="font-size: 10px;"
+                  *ngIf="cliente.get('fecha_nacimiento').hasError('required') && (cliente.get('fecha_nacimiento').touched || cliente.get('fecha_nacimiento').dirty)">
+                  Telefono requerido
+                </span>
               </div>
-              <!-- <div class="col-md-4">
-                <div class="form-group mb-3">
-                  <label>Fecha Nacimiento</label>
-                  <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="fechaNacimiento" [(ngModel)]="model" ngbDatepicker
-                      #d="ngbDatepicker">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-primary" (click)="d.toggle()" type="button">
-                        <i class="far fa-calendar-alt"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
 
               <!-- Saldo de Cliente -->
               <div class="col-md-4">
                 <div class="form-group mb-3">
                   <label>Saldo</label>
-                  <input type="text" class="form-control" readonly>
+                  <input type="text" class="form-control" readonly formControlName="saldo">
                 </div>
               </div>
 
@@ -103,9 +127,11 @@
                   <label>Estado</label>
                   <br>
                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked="">
+                    <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
+                      formControlName="estado" value="1">
                     <label class="btn btn-outline-primary" for="btnradio1">Activado</label>
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked="">
+                    <input type="radio" class="btn-check" id="btnradio2" autocomplete="off"
+                      formControlName="estado" value="0">
                     <label class="btn btn-outline-primary" for="btnradio2">Desactivado</label>
                   </div>
                 </div>

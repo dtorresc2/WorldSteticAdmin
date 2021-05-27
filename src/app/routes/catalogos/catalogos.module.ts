@@ -7,13 +7,15 @@ import { ListaClientesComponent } from './clientes/lista-clientes/lista-clientes
 import { CatalogosComponent } from './catalogos/catalogos.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
 import { FormUsuariosComponent } from './usuarios/form-usuarios/form-usuarios.component';
 import { ServiciosComponent } from './servicios/servicios/servicios.component';
 import { ListaServiciosComponent } from './servicios/lista-servicios/lista-servicios.component';
 import { FormServiciosComponent } from './servicios/form-servicios/form-servicios.component';
+import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -31,9 +33,14 @@ import { FormServiciosComponent } from './servicios/form-servicios/form-servicio
   ],
   imports: [
     CommonModule,
-    CatalogosRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    CatalogosRoutingModule
+  ],
+  providers: [
+    ClientesService
   ]
 })
 export class CatalogosModule { }

@@ -40,10 +40,10 @@
                         <tbody>
                             <tr
                                 *ngFor="let cliente of clientes | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-                                <td>{{cliente.ID}}</td>
+                                <td>{{cliente.ID_CLIENTE}}</td>
                                 <td>{{cliente.NOMBRE}}</td>
                                 <td>{{cliente.NIT}}</td>
-                                <td>{{cliente.SALDO}}</td>
+                                <td>{{cliente.SALDO_ACTUAL}}</td>
                                 <td>
                                     <span *ngIf="cliente.ESTADO == '1'" class="badge bg-success pb-1">Activo</span>
                                     <span *ngIf="cliente.ESTADO == '0'" class="badge bg-danger pb-1">Desactivado</span>
@@ -51,7 +51,7 @@
                                 <td>
                                     <div>
                                         <button type="button" class="btn btn-primary btn-sm pb-sm" ngbTooltip="Editar"
-                                            (click)="editarCliente(cliente.ID)">
+                                            (click)="editarCliente(cliente.ID_CLIENTE)">
                                             <i class="fas fa-pen "></i>
                                         </button>
                                         <button type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar">
