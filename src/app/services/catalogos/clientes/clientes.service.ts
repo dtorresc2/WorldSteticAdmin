@@ -36,4 +36,16 @@ export class ClientesService {
         })
     });
   }
+
+  registrarCliente(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.API_URL + 'clientes/' + id, { headers: this.HEADERS }).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
 }

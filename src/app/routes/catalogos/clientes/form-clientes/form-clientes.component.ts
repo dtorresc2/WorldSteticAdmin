@@ -2,6 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Cliente } from 'src/app/models/cliente';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { FechaService } from 'src/app/services/utils/fecha.service';
 
@@ -58,6 +59,17 @@ export class FormClientesComponent implements OnInit {
     this.cliente.get('estado').setValue((<any>valores).ESTADO);
   }
 
-  
-  
+  registrarCliente() {
+    let cliente: Cliente = {
+      NOMBRE: this.cliente.get('nombre').value,
+      DIRECCION: this.cliente.get('direccion').value,
+      NIT: this.cliente.get('nit').value,
+      TELEFONO: this.cliente.get('telefono').value,
+      CORREO: this.cliente.get('correo').value,
+      FECHA_NACIMIENTO: this.cliente.get('fecha_nacimiento').value,
+      ESTADO: Number.parseInt(this.cliente.get('estado').value)
+    }
+
+    console.log(cliente);
+  }
 }
