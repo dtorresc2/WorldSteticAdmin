@@ -9,9 +9,7 @@ import { Cliente } from 'src/app/models/cliente';
 export class ClientesService {
   HEADERS: any;
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   obtenerClientes(): Promise<any> {
     this.HEADERS = new HttpHeaders();
