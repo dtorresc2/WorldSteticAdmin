@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 
 import { CatalogosRoutingModule } from './catalogos-routing.module';
 import { ClientesComponent } from './clientes/clientes/clientes.component';
@@ -16,6 +16,7 @@ import { ListaServiciosComponent } from './servicios/lista-servicios/lista-servi
 import { FormServiciosComponent } from './servicios/form-servicios/form-servicios.component';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FechaService } from 'src/app/services/utils/fecha.service';
 
 
 @NgModule({
@@ -40,7 +41,10 @@ import { HttpClientModule } from '@angular/common/http';
     CatalogosRoutingModule
   ],
   providers: [
-    ClientesService
+    ClientesService,
+    DecimalPipe,
+    DatePipe,
+    FechaService
   ]
 })
 export class CatalogosModule { }

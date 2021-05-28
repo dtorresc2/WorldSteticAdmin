@@ -1,3 +1,4 @@
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +20,9 @@ export class FormClientesComponent implements OnInit {
   constructor(
     private router: Router,
     private activedRoute: ActivatedRoute,
-    private clienteService: ClientesService
+    private clienteService: ClientesService,
+    private decimalPipe: DecimalPipe,
+    private datePipe: DatePipe
   ) {
     this.cliente = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
@@ -48,5 +51,17 @@ export class FormClientesComponent implements OnInit {
   rellenarFormulario(valores) {
     this.cliente.get('nombre').setValue((<any>valores).NOMBRE);
     this.cliente.get('direccion').setValue((<any>valores).DIRECCION);
+    this.cliente.get('nit').setValue((<any>valores).NIT);
+    this.cliente.get('telefono').setValue((<any>valores).TELEFONO);
+    this.cliente.get('correo').setValue((<any>valores).CORREO);
+    // this.cliente.get('fecha_nacimiento').setValue(this.datePipe.transform((<any>valores).FECHA_NACIMIENTO, 'yyyy/MM/dd'));
+    
+    // let stringDate = (<any>valores).FECHA_NACIMIENTO;
+    
+    // console.log(date);
+
+    // this.cliente.get('fecha_nacimiento').setValue(date);
+    this.cliente.get('saldo').setValue(this.decimalPipe.transform((<any>valores).SALDO_ACTUAL, '1.2-2'));
+    this.cliente.get('estado').setValue((<any>valores).ESTADO);
   }
 }
