@@ -1,9 +1,9 @@
-import { DatePipe, DecimalPipe } from '@angular/common';
-import { Component, Injectable, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
+import { FechaService } from 'src/app/services/utils/fecha.service';
 
 @Component({
   selector: 'app-form-clientes',
@@ -13,7 +13,6 @@ import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.se
 export class FormClientesComponent implements OnInit {
   modoEdicion: boolean = false;
   ID_CLIENTE: any = 0;
-  model: NgbDateStruct;
 
   cliente: FormGroup;
 
@@ -22,7 +21,7 @@ export class FormClientesComponent implements OnInit {
     private activedRoute: ActivatedRoute,
     private clienteService: ClientesService,
     private decimalPipe: DecimalPipe,
-    private datePipe: DatePipe
+    private fechaService: FechaService
   ) {
     this.cliente = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
@@ -54,14 +53,11 @@ export class FormClientesComponent implements OnInit {
     this.cliente.get('nit').setValue((<any>valores).NIT);
     this.cliente.get('telefono').setValue((<any>valores).TELEFONO);
     this.cliente.get('correo').setValue((<any>valores).CORREO);
-    // this.cliente.get('fecha_nacimiento').setValue(this.datePipe.transform((<any>valores).FECHA_NACIMIENTO, 'yyyy/MM/dd'));
-    
-    // let stringDate = (<any>valores).FECHA_NACIMIENTO;
-    
-    // console.log(date);
-
-    // this.cliente.get('fecha_nacimiento').setValue(date);
+    this.cliente.get('fecha_nacimiento').setValue(this.fechaService.fechaFormToBD((<any>valores).FECHA_NACIMIENTO));
     this.cliente.get('saldo').setValue(this.decimalPipe.transform((<any>valores).SALDO_ACTUAL, '1.2-2'));
     this.cliente.get('estado').setValue((<any>valores).ESTADO);
   }
+
+  
+  
 }

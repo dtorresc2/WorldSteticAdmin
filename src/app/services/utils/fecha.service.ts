@@ -7,7 +7,6 @@ export class FechaService {
 
   constructor() { }
 
-
   fechaFormToBD(fecha): string {
     let splitDate = fecha.split('/');
     let year1 = splitDate[2];
