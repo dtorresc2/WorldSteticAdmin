@@ -59,7 +59,7 @@ export class FormClientesComponent implements OnInit {
     this.cliente.get('estado').setValue((<any>valores).ESTADO);
   }
 
-  registrarCliente() {
+  async registrarCliente() {
     let cliente: Cliente = {
       NOMBRE: this.cliente.get('nombre').value,
       DIRECCION: this.cliente.get('direccion').value,
@@ -70,6 +70,9 @@ export class FormClientesComponent implements OnInit {
       ESTADO: Number.parseInt(this.cliente.get('estado').value)
     }
 
-    console.log(cliente);
+    if (!this.modoEdicion){
+      let respuesta = await this.clienteService.registrarCliente(cliente);
+      this.router.navigate(['catalogos','clientes']);
+    }
   }
 }

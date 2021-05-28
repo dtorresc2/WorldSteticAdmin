@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { Cliente } from 'src/app/models/cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,14 @@ export class ClientesService {
   HEADERS: any;
 
   constructor(private http: HttpClient) {
-    this.HEADERS = new HttpHeaders();
-    this.HEADERS.set('Content-Type', 'application/json; charset=utf-8');
+
   }
 
   obtenerClientes(): Promise<any> {
+    this.HEADERS = new HttpHeaders();
+    this.HEADERS.set('Content-Type', 'application/json; charset=utf-8');
+    this.HEADERS.set('Access-Control-Allow-Origin', '*');
+
     return new Promise((resolve, reject) => {
       this.http.get(environment.API_URL + 'clientes', { headers: this.HEADERS }).toPromise().then(
         res => {
@@ -26,6 +30,10 @@ export class ClientesService {
   }
 
   obtenerCliente(id): Promise<any> {
+    this.HEADERS = new HttpHeaders();
+    this.HEADERS.set('Content-Type', 'application/json; charset=utf-8');
+    this.HEADERS.set('Access-Control-Allow-Origin', '*');
+
     return new Promise((resolve, reject) => {
       this.http.get(environment.API_URL + 'clientes/' + id, { headers: this.HEADERS }).toPromise().then(
         res => {
@@ -37,15 +45,22 @@ export class ClientesService {
     });
   }
 
-  registrarCliente(id): Promise<any> {
+  registrarCliente(cliente: Cliente): Promise<any> {
+    console.log (cliente);
     return new Promise((resolve, reject) => {
-      this.http.get(environment.API_URL + 'clientes/' + id, { headers: this.HEADERS }).toPromise().then(
-        res => {
-          resolve(res);
-        },
-        msg => {
-          reject(msg);
-        })
+      this.http.post(environment.API_URL + 'clientes', cliente,
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          }
+        }
+        ).toPromise().then(
+          res => {
+            resolve(res);
+          },
+          msg => {
+            reject(msg);
+          });
     });
   }
 }
