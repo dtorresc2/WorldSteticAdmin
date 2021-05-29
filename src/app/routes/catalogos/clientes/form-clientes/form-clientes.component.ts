@@ -18,6 +18,8 @@ export class FormClientesComponent implements OnInit {
 
   cliente: FormGroup;
 
+  carga: boolean = false;
+
   constructor(
     private router: Router,
     private activedRoute: ActivatedRoute,
@@ -46,6 +48,8 @@ export class FormClientesComponent implements OnInit {
     }
     else {
       this.modoEdicion = false;
+      this.cliente.get('estado').setValue('1');
+      this.carga = true;
     }
   }
 
@@ -58,6 +62,7 @@ export class FormClientesComponent implements OnInit {
     this.cliente.get('fecha_nacimiento').setValue(this.fechaService.fechaFormToBD((<any>valores).FECHA_NACIMIENTO));
     this.cliente.get('saldo').setValue(this.decimalPipe.transform((<any>valores).SALDO_ACTUAL, '1.2-2'));
     this.cliente.get('estado').setValue((<any>valores).ESTADO);
+    this.carga = true;
   }
 
   async registrarCliente() {

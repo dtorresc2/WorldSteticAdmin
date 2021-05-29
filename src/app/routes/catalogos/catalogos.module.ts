@@ -17,6 +17,7 @@ import { FormServiciosComponent } from './servicios/form-servicios/form-servicio
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FechaService } from 'src/app/services/utils/fecha.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -38,7 +39,9 @@ import { FechaService } from 'src/app/services/utils/fecha.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CatalogosRoutingModule
+    SharedModule,
+    CatalogosRoutingModule,
+    
   ],
   providers: [
     ClientesService,
