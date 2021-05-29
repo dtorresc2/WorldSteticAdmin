@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="card border-light mb-3">
             <div class="card-header"><i class="fas fa-users" style="margin-right: 1%;"></i>
-                Listado de Clientes<a class="btn btn-link btn-sm" ngbTooltip="Actualizar"><i
+                Listado de Clientes<a class="btn btn-link btn-sm" ngbTooltip="Actualizar" (click)="obtenerClientes()"><i
                         class="fas fa-sync-alt"></i></a>
 
                 <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="crearCliente()">
@@ -35,7 +35,7 @@
                                 <th>Nombre</th>
                                 <th>NIT</th>
                                 <th>Saldo</th>
-                                <th>Estado</th>
+                                <th style="width: 150px;">Estado</th>
                                 <th style="width: 120px;">Acciones</th>
                             </tr>
                         </thead>
@@ -45,18 +45,19 @@
                                 <td>{{cliente.ID_CLIENTE}}</td>
                                 <td>{{cliente.NOMBRE}}</td>
                                 <td>{{cliente.NIT}}</td>
-                                <td>{{cliente.SALDO_ACTUAL}}</td>
+                                <td>{{cliente.SALDO_ACTUAL | number : '1.2-2'}}</td>
                                 <td>
                                     <span *ngIf="cliente.ESTADO == '1'" class="badge bg-success pb-1">Activo</span>
                                     <span *ngIf="cliente.ESTADO == '0'" class="badge bg-danger pb-1">Desactivado</span>
                                 </td>
                                 <td>
-                                    <div>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-primary btn-sm pb-sm" ngbTooltip="Editar"
                                             (click)="editarCliente(cliente.ID_CLIENTE)">
                                             <i class="fas fa-pen "></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar">
+                                        <button type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
+                                            (click)="eliminarCliente(cliente.ID_CLIENTE)">
                                             <i class="fas fa-trash "></i>
                                         </button>
                                     </div>

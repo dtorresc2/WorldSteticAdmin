@@ -2,6 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { nitMatchValidator } from 'src/app/functions/validacionNit';
 import { Cliente } from 'src/app/models/cliente';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { FechaService } from 'src/app/services/utils/fecha.service';
@@ -30,13 +31,17 @@ export class FormClientesComponent implements OnInit {
     this.cliente = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       direccion: new FormControl(''),
-      nit: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
+      nit: new FormControl('', [Validators.required]),
       telefono: new FormControl('', [Validators.required]),
       correo: new FormControl(''),
       fecha_nacimiento: new FormControl('', [Validators.required]),
       saldo: new FormControl(''),
       estado: new FormControl('')
-    });
+    },
+      {
+        validators: nitMatchValidator
+      }
+    );
   }
 
   async ngOnInit() {
@@ -52,6 +57,7 @@ export class FormClientesComponent implements OnInit {
       this.carga = true;
     }
   }
+
 
   rellenarFormulario(valores) {
     this.cliente.get('nombre').setValue((<any>valores).NOMBRE);
@@ -75,20 +81,6 @@ export class FormClientesComponent implements OnInit {
       FECHA_NACIMIENTO: this.cliente.get('fecha_nacimiento').value,
       ESTADO: Number.parseInt(this.cliente.get('estado').value)
     }
-
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: "You won't be able to revert this!",
-    //   icon: 'question',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#2a3848',
-    //   cancelButtonColor: '#dd4236',
-    //   confirmButtonText: 'Yes, delete it!'
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-
-    //   }
-    // });
 
     if (!this.modoEdicion) {
       let respuesta = await this.clienteService.registrarCliente(cliente);

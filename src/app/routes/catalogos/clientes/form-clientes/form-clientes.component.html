@@ -58,7 +58,8 @@
               <!-- Nit -->
               <div class="col-md-4">
                 <div class="form-group mb-3">
-                  <label>NIT</label>
+                  <label>NIT<a class="btn btn-link btn-sm" ngbTooltip="Puede ingresar CF o C/F" placement="right"><i
+                        class="fas fa-info-circle"></i></a></label>
                   <input type="text" class="form-control" formControlName="nit" maxlength="10">
                   <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
                     Max: 10 caracteres
@@ -67,8 +68,7 @@
                     *ngIf="cliente.get('nit').hasError('required') && (cliente.get('nit').touched || cliente.get('nit').dirty)">
                     Nit requerido
                   </span>
-                  <span class="text-danger" style="font-size: 10px;"
-                    *ngIf="cliente.get('nit').hasError('pattern') && (cliente.get('nit').touched || cliente.get('nit').dirty)">
+                  <span class="text-danger" style="font-size: 10px;" *ngIf="cliente.errors?.nitInvalido">
                     Nit invalido
                   </span>
                 </div>
