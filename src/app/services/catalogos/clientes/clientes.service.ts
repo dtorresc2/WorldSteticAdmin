@@ -9,7 +9,7 @@ import { Cliente } from 'src/app/models/cliente';
 export class ClientesService {
   HEADERS: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   obtenerClientes(): Promise<any> {
     this.HEADERS = new HttpHeaders();
@@ -51,13 +51,32 @@ export class ClientesService {
             'Content-Type': 'application/json; charset=utf-8'
           }
         }
-        ).toPromise().then(
-          res => {
-            resolve(res);
-          },
-          msg => {
-            reject(msg);
-          });
+      ).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        });
     });
   }
+
+  actualizarCliente(id, cliente: Cliente): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.put(environment.API_URL + 'clientes/' + id, cliente,
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          }
+        }
+      ).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        });
+    });
+  }
+
 }

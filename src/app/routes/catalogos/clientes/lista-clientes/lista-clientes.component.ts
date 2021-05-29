@@ -12,21 +12,13 @@ export class ListaClientesComponent implements OnInit {
   // Paginacion
   page = 1;
   pageSize = 10;
+  carga: boolean = false;
 
   constructor(private router: Router, private clienteService: ClientesService) { }
 
   async ngOnInit() {
-    // console.log(await this.clienteService.obtenerClientes())
     this.clientes = await this.clienteService.obtenerClientes();
-    // for (let i = 0; i < 45; i++) {
-    //   this.clientes.push({
-    //     ID: (i + 1),
-    //     NOMBRE: "Diego Roberto Torres Claros",
-    //     NIT: "1232112312",
-    //     SALDO: 12.32,
-    //     ESTADO: 1,
-    //   });
-    // }
+    this.carga = true;
   }
 
   crearCliente() {
@@ -36,5 +28,4 @@ export class ListaClientesComponent implements OnInit {
   editarCliente(id) {
     this.router.navigate(['catalogos/clientes', id, 'editar']);
   }
-
 }

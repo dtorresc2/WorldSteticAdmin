@@ -114,5 +114,29 @@ export class FormClientesComponent implements OnInit {
         });
       }
     }
+    else {
+      let respuesta = await this.clienteService.actualizarCliente(this.ID_CLIENTE, cliente);
+      if ((<any>respuesta.ESTADO == 1)) {
+        Swal.fire({
+          title: 'Clientes',
+          text: 'Cliente actualizado correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2a3848',
+          showCloseButton: true
+        });
+        this.router.navigate(['catalogos', 'clientes']);
+      }
+      else {
+        Swal.fire({
+          title: 'Clientes',
+          text: 'Fallo al actualizar',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2a3848',
+          showCloseButton: true
+        });
+      }
+    }
   }
 }
