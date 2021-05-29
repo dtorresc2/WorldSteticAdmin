@@ -44,7 +44,6 @@ export class ClientesService {
   }
 
   registrarCliente(cliente: Cliente): Promise<any> {
-    console.log (cliente);
     return new Promise((resolve, reject) => {
       this.http.post(environment.API_URL + 'clientes', cliente,
         {

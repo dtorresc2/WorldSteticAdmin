@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/models/cliente';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { FechaService } from 'src/app/services/utils/fecha.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-clientes',
@@ -70,9 +71,43 @@ export class FormClientesComponent implements OnInit {
       ESTADO: Number.parseInt(this.cliente.get('estado').value)
     }
 
-    if (!this.modoEdicion){
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: "You won't be able to revert this!",
+    //   icon: 'question',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#2a3848',
+    //   cancelButtonColor: '#dd4236',
+    //   confirmButtonText: 'Yes, delete it!'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+
+    //   }
+    // });
+
+    if (!this.modoEdicion) {
       let respuesta = await this.clienteService.registrarCliente(cliente);
-      this.router.navigate(['catalogos','clientes']);
+      if ((<any>respuesta.ESTADO == 1)) {
+        Swal.fire({
+          title: 'Clientes',
+          text: 'Cliente registrado correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2a3848',
+          showCloseButton: true
+        });
+        this.router.navigate(['catalogos', 'clientes']);
+      }
+      else {
+        Swal.fire({
+          title: 'Clientes',
+          text: 'Fallo al registrar',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2a3848',
+          showCloseButton: true
+        });
+      }
     }
   }
 }
