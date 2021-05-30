@@ -22,4 +22,16 @@ export class UsuariosService {
         })
     });
   }
+
+  obtenerUsuario(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.API_URL + 'usuarios/' + id).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
 }
