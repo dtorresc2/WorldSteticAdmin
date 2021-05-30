@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/catalogos/usuarios/usuarios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-usuarios',
@@ -52,5 +53,20 @@ export class FormUsuariosComponent implements OnInit {
     this.usuario.get('pass').setValue('0');
     this.usuario.get('confirmPass').setValue('0');
     this.carga = true;
+  }
+
+  async registrarServicio() {
+    if (!this.usuario.invalid) {
+    }
+    else {
+      Swal.fire({
+        title: 'Servicios',
+        text: 'Faltan campos o hay datos incorrectos',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2a3848',
+        showCloseButton: true
+      });
+    }
   }
 }

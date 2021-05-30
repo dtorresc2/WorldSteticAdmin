@@ -24,24 +24,48 @@
             <form [formGroup]="this.usuario">
                <div class="form">
                   <div class="row">
-                     <!-- Nombre -->
+                     <!-- Usuario -->
                      <div class="col-md-4">
                         <div class="form-group mb-3">
                            <label>Usuario</label>
-                           <input type="text" class="form-control" formControlName="usuario">
+                           <input type="text" class="form-control" formControlName="usuario" maxlength="35">
+                           <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                              Max: 35 caracteres
+                           </span>
+                           <span class="text-danger" style="font-size: 10px;"
+                              *ngIf="usuario.get('usuario').hasError('required') && (usuario.get('usuario').touched || usuario.get('usuario').dirty)">
+                              Usuario requerido
+                           </span>
                         </div>
                      </div>
-                     <!-- Direccion -->
+
+                     <!-- Contraseña -->
                      <div class="col-md-4">
                         <div class="form-group mb-3">
                            <label>Contraseña</label>
-                           <input type="password" class="form-control" formControlName="pass">
+                           <input type="password" class="form-control" formControlName="pass" maxlength="35">
+                           <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                              Max: 35 caracteres
+                           </span>
+                           <span class="text-danger" style="font-size: 10px;"
+                              *ngIf="usuario.get('pass').hasError('required') && (usuario.get('pass').touched || usuario.get('pass').dirty)">
+                              Password requerido
+                           </span>
                         </div>
                      </div>
+
+                     <!-- Confirmar contraseña -->
                      <div class="col-md-4">
                         <div class="form-group mb-3">
                            <label>Confirmar Contraseña</label>
                            <input type="password" class="form-control" formControlName="confirmPass">
+                           <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                              Max: 35 caracteres
+                           </span>
+                           <span class="text-danger" style="font-size: 10px;"
+                              *ngIf="usuario.get('confirmPass').hasError('required') && (usuario.get('confirmPass').touched || usuario.get('confirmPass').dirty)">
+                              Password requerido
+                           </span>
                         </div>
                      </div>
                   </div>
