@@ -71,4 +71,22 @@ export class ServiciosService {
         });
     });
   }
+
+  eliminarServicio(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(environment.API_URL + 'servicios/' + id,
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          }
+        }
+      ).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        });
+    });
+  }
 }

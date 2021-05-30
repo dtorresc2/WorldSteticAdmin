@@ -43,18 +43,19 @@
                                 *ngFor="let servicio of servicios | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>{{servicio.ID_SERVICIO}}</td>
                                 <td>{{servicio.DESCRIPCION}}</td>
-                                <td>{{servicio.MONTO}}</td>
+                                <td>{{servicio.MONTO | number : '1.2-2'}}</td>
                                 <td>
                                     <span *ngIf="servicio.ESTADO == '1'" class="badge bg-success pb-1">Activo</span>
                                     <span *ngIf="servicio.ESTADO == '0'" class="badge bg-danger pb-1">Desactivado</span>
                                 </td>
                                 <td>
-                                    <div>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-primary btn-sm pb-sm" ngbTooltip="Editar"
                                             (click)="editarServicio(servicio.ID_SERVICIO)">
                                             <i class="fas fa-pen "></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar">
+                                        <button type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
+                                            (click)="eliminarServicio(servicio.ID_SERVICIO)">
                                             <i class="fas fa-trash "></i>
                                         </button>
                                     </div>
