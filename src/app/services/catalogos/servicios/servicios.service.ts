@@ -54,7 +54,7 @@ export class ServiciosService {
     });
   }
 
-  actualizarCliente(id, servicio: Servicio): Promise<any> {
+  actualizarServicio(id, servicio: Servicio): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.put(environment.API_URL + 'servicios/' + id, servicio,
         {

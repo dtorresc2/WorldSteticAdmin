@@ -72,63 +72,75 @@ export class FormClientesComponent implements OnInit {
   }
 
   async registrarCliente() {
-    let cliente: Cliente = {
-      NOMBRE: this.cliente.get('nombre').value,
-      DIRECCION: this.cliente.get('direccion').value,
-      NIT: this.cliente.get('nit').value,
-      TELEFONO: this.cliente.get('telefono').value,
-      CORREO: this.cliente.get('correo').value,
-      FECHA_NACIMIENTO: this.cliente.get('fecha_nacimiento').value,
-      ESTADO: Number.parseInt(this.cliente.get('estado').value)
-    }
+    if (!this.cliente.invalid) {
+      let cliente: Cliente = {
+        NOMBRE: this.cliente.get('nombre').value,
+        DIRECCION: this.cliente.get('direccion').value,
+        NIT: this.cliente.get('nit').value,
+        TELEFONO: this.cliente.get('telefono').value,
+        CORREO: this.cliente.get('correo').value,
+        FECHA_NACIMIENTO: this.cliente.get('fecha_nacimiento').value,
+        ESTADO: Number.parseInt(this.cliente.get('estado').value)
+      }
 
-    if (!this.modoEdicion) {
-      let respuesta = await this.clienteService.registrarCliente(cliente);
-      if ((<any>respuesta.ESTADO == 1)) {
-        Swal.fire({
-          title: 'Clientes',
-          text: 'Cliente registrado correctamente',
-          icon: 'success',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#2a3848',
-          showCloseButton: true
-        });
-        this.router.navigate(['catalogos', 'clientes']);
+      if (!this.modoEdicion) {
+        let respuesta = await this.clienteService.registrarCliente(cliente);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Clientes',
+            text: 'Cliente registrado correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          this.router.navigate(['catalogos', 'clientes']);
+        }
+        else {
+          Swal.fire({
+            title: 'Clientes',
+            text: 'Fallo al registrar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
       }
       else {
-        Swal.fire({
-          title: 'Clientes',
-          text: 'Fallo al registrar',
-          icon: 'error',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#2a3848',
-          showCloseButton: true
-        });
+        let respuesta = await this.clienteService.actualizarCliente(this.ID_CLIENTE, cliente);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Clientes',
+            text: 'Cliente actualizado correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          this.router.navigate(['catalogos', 'clientes']);
+        }
+        else {
+          Swal.fire({
+            title: 'Clientes',
+            text: 'Fallo al actualizar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
       }
     }
     else {
-      let respuesta = await this.clienteService.actualizarCliente(this.ID_CLIENTE, cliente);
-      if ((<any>respuesta.ESTADO == 1)) {
-        Swal.fire({
-          title: 'Clientes',
-          text: 'Cliente actualizado correctamente',
-          icon: 'success',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#2a3848',
-          showCloseButton: true
-        });
-        this.router.navigate(['catalogos', 'clientes']);
-      }
-      else {
-        Swal.fire({
-          title: 'Clientes',
-          text: 'Fallo al actualizar',
-          icon: 'error',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#2a3848',
-          showCloseButton: true
-        });
-      }
+      Swal.fire({
+        title: 'Clientes',
+        text: 'Faltan campos o hay datos incorrectos',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2a3848',
+        showCloseButton: true
+      });
     }
   }
 }

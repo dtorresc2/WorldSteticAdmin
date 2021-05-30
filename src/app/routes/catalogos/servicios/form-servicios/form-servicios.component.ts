@@ -53,37 +53,71 @@ export class FormServiciosComponent implements OnInit {
   }
 
   async registrarServicio() {
-    let servicio: Servicio = {
-      DESCRIPCION: this.servicio.get('descripcion').value,
-      ESTADO: Number.parseInt(this.servicio.get('estado').value),
-      MONTO: Number.parseInt(this.servicio.get('monto').value)
-    }
-    console.log(servicio);
+    if (!this.servicio.invalid) {
+      let servicio: Servicio = {
+        DESCRIPCION: this.servicio.get('descripcion').value,
+        ESTADO: Number.parseInt(this.servicio.get('estado').value),
+        MONTO: Number.parseInt(this.servicio.get('monto').value)
+      }
 
-    if (!this.modoEdicion) {
-      let respuesta = await this.servicioService.registrarServicio(servicio);
-      if ((<any>respuesta.ESTADO == 1)) {
-        Swal.fire({
-          title: 'Servicios',
-          text: 'Servicio registrado correctamente',
-          icon: 'success',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#2a3848',
-          showCloseButton: true
-        });
-        this.router.navigate(['catalogos', 'servicios']);
+      if (!this.modoEdicion) {
+        let respuesta = await this.servicioService.registrarServicio(servicio);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Servicios',
+            text: 'Servicio registrado correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          this.router.navigate(['catalogos', 'servicios']);
+        }
+        else {
+          Swal.fire({
+            title: 'Servicios',
+            text: 'Fallo al registrar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
       }
       else {
-        Swal.fire({
-          title: 'Servicios',
-          text: 'Fallo al registrar',
-          icon: 'error',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#2a3848',
-          showCloseButton: true
-        });
+        let respuesta = await this.servicioService.actualizarServicio(this.ID_SERVICIO, servicio);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Servicios',
+            text: 'Servicio actualizado correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          this.router.navigate(['catalogos', 'servicios']);
+        }
+        else {
+          Swal.fire({
+            title: 'Servicios',
+            text: 'Fallo al actualizar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
       }
     }
+    else {
+      Swal.fire({
+        title: 'Servicios',
+        text: 'Faltan campos o hay datos incorrectos',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2a3848',
+        showCloseButton: true
+      });
+    }
   }
-
 }
