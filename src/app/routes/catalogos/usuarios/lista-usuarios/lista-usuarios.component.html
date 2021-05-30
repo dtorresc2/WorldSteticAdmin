@@ -10,7 +10,7 @@
    <div class="col-md-12">
       <div class="card border-light mb-3">
          <div class="card-header"><i class="fas fa-user-cog" style="margin-right: 1%;"></i>
-            Listado de Usuarios<a class="btn btn-link btn-sm" ngbTooltip="Actualizar"><i
+            Listado de Usuarios<a class="btn btn-link btn-sm" ngbTooltip="Actualizar" (click)="obtenerUsuarios()"><i
                   class="fas fa-sync-alt"></i></a>
 
             <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="crearUsuario()">
@@ -51,7 +51,7 @@
                            <span *ngIf="usuario.ESTADO == '0'" class="badge bg-danger pb-1">Desactivado</span>
                         </td>
                         <td>
-                           <div>
+                           <div class="btn-group" role="group" aria-label="Basic example">
                               <button type="button" class="btn btn-primary btn-sm pb-sm" ngbTooltip="Editar"
                                  (click)="editarUsuario(usuario.ID_USUARIO)">
                                  <i class="fas fa-pen "></i>
