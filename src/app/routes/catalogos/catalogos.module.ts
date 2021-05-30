@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FechaService } from 'src/app/services/utils/fecha.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
+import { UsuariosService } from 'src/app/services/catalogos/usuarios/usuarios.service';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios
     DecimalPipe,
     DatePipe,
     FechaService,
-    ServiciosService
+    ServiciosService,
+    UsuariosService
   ]
 })
 export class CatalogosModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuariosService } from 'src/app/services/catalogos/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -12,17 +13,22 @@ export class ListaUsuariosComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
-  constructor(private router: Router) { }
+  carga: boolean = false;
 
-  ngOnInit(): void {
-    for (let i = 0; i < 45; i++) {
-      this.usuarios.push({
-        ID: (i + 1),
-        USUARIO: "dtorresc",
-        TIPO: 1,
-        ESTADO: 1,
-      });
-    }
+  constructor(
+    private router: Router,
+    private usuarioService: UsuariosService
+  ) { }
+
+  async ngOnInit() {
+    await this.obtenerServicios();
+  }
+
+  async obtenerServicios(): Promise<any> {
+    this.carga = false;
+    this.usuarios = await this.usuarioService.obtenerUsuarios();
+    this.carga = true;
+    return true;
   }
 
   crearUsuario() {

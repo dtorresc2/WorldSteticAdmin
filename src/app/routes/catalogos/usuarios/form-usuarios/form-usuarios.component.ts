@@ -20,11 +20,9 @@ export class FormUsuariosComponent implements OnInit {
     if (params.id) {
       this.modoEdicion = true;
       this.ID_USUARIO = params.id;
-      // console.log(params.id);
     }
     else {
       this.modoEdicion = false;
-      // this.router.navigate(['catalogos', 'clientes']);
     }
   }
 

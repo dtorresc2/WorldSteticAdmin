@@ -1,4 +1,6 @@
-<ol class="breadcrumb bg-light">
+<app-loader *ngIf='!this.carga'></app-loader>
+
+<ol class="breadcrumb bg-light" *ngIf='this.carga'>
   <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
   <li class="breadcrumb-item"><a routerLink="/catalogos">Catalogos</a></li>
   <li class="breadcrumb-item"><a routerLink="/catalogos/servicios">Servicios</a></li>
@@ -6,7 +8,7 @@
   <li *ngIf="this.modoEdicion" class="breadcrumb-item active">Editar Servicio</li>
 </ol>
 
-<div class="row">
+<div class="row" *ngIf='this.carga'>
   <div class="col-md-12">
     <div class="card border-light mb-3">
       <div class="card-header"><i class="fas fa-concierge-bell" style="margin-right: 1%;"></i>

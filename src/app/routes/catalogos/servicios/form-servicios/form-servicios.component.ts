@@ -42,6 +42,7 @@ export class FormServiciosComponent implements OnInit {
     else {
       this.modoEdicion = false;
       this.servicio.get('estado').setValue('1');
+      this.carga = true;
     }
   }
 

@@ -97,3 +97,6 @@ export class ClientesService {
     });
   }
 }
+// https://www.itsolutionstuff.com/post/angular-9-8-sweetalert2-sample-example-tutorialexample.html
+// https://sweetalert2.github.io/#examples
+// https://imagecolorpicker.com/
