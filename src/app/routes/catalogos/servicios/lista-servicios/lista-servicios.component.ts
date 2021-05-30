@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
 
 @Component({
   selector: 'app-lista-servicios',
@@ -11,17 +12,23 @@ export class ListaServiciosComponent implements OnInit {
   // Paginacion
   page = 1;
   pageSize = 10;
-  constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    for (let i = 0; i < 45; i++) {
-      this.servicios.push({
-        ID: (i + 1),
-        DESCRIPCION: "Servicio Nuevo",
-        MONTO: 12.32,
-        ESTADO: 1,
-      });
-    }
+  carga: boolean = false;
+
+  constructor(
+    private router: Router,
+    private servicioServices: ServiciosService
+  ) { }
+
+  async ngOnInit() {
+    await this.obtenerServicios();
+  }
+
+  async obtenerServicios(): Promise<any> {
+    this.carga = false;
+    this.servicios = await this.servicioServices.obtenerServicios();
+    this.carga = true;
+    return true;
   }
 
   crearServicio() {
