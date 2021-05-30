@@ -1,4 +1,4 @@
-export interface Cliente {
+export interface Servicio {
    DESCRIPCION?: string;
    MONTO?: number;
    ESTADO?: number;

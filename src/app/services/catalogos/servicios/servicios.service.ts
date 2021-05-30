@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Servicio } from 'src/app/models/servicio';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,6 +21,54 @@ export class ServiciosService {
         msg => {
           reject(msg);
         })
+    });
+  }
+
+  obtenerServicio(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.API_URL + 'servicios/' + id).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  registrarServicio(servicio: Servicio): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'servicios', servicio,
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          }
+        }
+      ).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        });
+    });
+  }
+
+  actualizarCliente(id, servicio: Servicio): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.put(environment.API_URL + 'servicios/' + id, servicio,
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          }
+        }
+      ).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        });
     });
   }
 }

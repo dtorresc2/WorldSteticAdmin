@@ -1,63 +1,82 @@
 <ol class="breadcrumb bg-light">
-   <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
-   <li class="breadcrumb-item"><a routerLink="/catalogos">Catalogos</a></li>
-   <li class="breadcrumb-item"><a routerLink="/catalogos/servicios">Servicios</a></li>
-   <li *ngIf="!this.modoEdicion" class="breadcrumb-item active">Crear Servicio</li>
-   <li *ngIf="this.modoEdicion" class="breadcrumb-item active">Editar Servicio</li>
+  <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+  <li class="breadcrumb-item"><a routerLink="/catalogos">Catalogos</a></li>
+  <li class="breadcrumb-item"><a routerLink="/catalogos/servicios">Servicios</a></li>
+  <li *ngIf="!this.modoEdicion" class="breadcrumb-item active">Crear Servicio</li>
+  <li *ngIf="this.modoEdicion" class="breadcrumb-item active">Editar Servicio</li>
 </ol>
 
 <div class="row">
-   <div class="col-md-12">
-     <div class="card border-light mb-3">
-       <div class="card-header"><i class="fas fa-concierge-bell" style="margin-right: 1%;"></i>
-         Servicio
-         <button type="button" class="btn btn-success btn-sm" style="float: right">
-           <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
-         </button>
- 
-         <a class="btn btn-primary btn-sm" style="float: right; margin-right: 1%;" routerLink="/catalogos/servicios">
-           <i class="fas fa-arrow-left" style="padding-right: 3%;"></i> Salir
-         </a>
-       </div>
-       <div class="card-body">
-         <form>
-           <div class="form">
- 
-             <div class="row">
-               <!-- Descripcion -->
-               <div class="col-md-8">
-                 <div class="form-group mb-3">
-                   <label>Descripcion</label>
-                   <input type="text" class="form-control">
-                 </div>
-               </div>
-               <!-- Monto -->
-               <div class="col-md-4">
-                 <div class="form-group mb-3">
-                   <label>Monto</label>
-                   <input type="text" class="form-control">
-                 </div>
-               </div>
-             </div>
- 
-             <div class="row">
-               <!-- Estado del Cliente -->
-               <div class="col-md-4">
-                 <div class="form-group mb-3">
-                   <label>Estado</label>
-                   <br>
-                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                     <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked="">
-                     <label class="btn btn-outline-primary" for="btnradio1">Activado</label>
-                     <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked="">
-                     <label class="btn btn-outline-primary" for="btnradio2">Desactivado</label>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </form>
-       </div>
-     </div>
-   </div>
- </div>
+  <div class="col-md-12">
+    <div class="card border-light mb-3">
+      <div class="card-header"><i class="fas fa-concierge-bell" style="margin-right: 1%;"></i>
+        Servicio
+        <button type="button" class="btn btn-success btn-sm" style="float: right" (click)='registrarServicio()'>
+          <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
+        </button>
+
+        <a class="btn btn-primary btn-sm" style="float: right; margin-right: 1%;" routerLink="/catalogos/servicios">
+          <i class="fas fa-arrow-left" style="padding-right: 3%;"></i> Salir
+        </a>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="this.servicio">
+          <div class="form">
+            <div class="row">
+              <!-- Descripcion -->
+              <div class="col-md-8">
+                <div class="form-group mb-3">
+                  <label>Descripción</label>
+                  <input type="text" class="form-control" formControlName="descripcion">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                    Max: 100 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="servicio.get('descripcion').hasError('required') && (servicio.get('descripcion').touched || servicio.get('descripcion').dirty)">
+                    Descripción requerida
+                  </span>
+                </div>
+              </div>
+              <!-- Monto -->
+              <div class="col-md-4">
+                <div class="form-group mb-3">
+                  <label>Monto</label>
+                  <input type="text" class="form-control" formControlName="monto" maxlength="10">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                    Max: 10 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="servicio.get('monto').hasError('required') && (servicio.get('monto').touched || servicio.get('monto').dirty)">
+                    Monto requerido
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="servicio.get('monto').hasError('pattern') && (servicio.get('monto').touched || servicio.get('monto').dirty)">
+                    Monto invalido
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Estado del Cliente -->
+              <div class="col-md-4">
+                <div class="form-group mb-3">
+                  <label>Estado</label>
+                  <br>
+                  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" id="btnradio1" autocomplete="off" formControlName="estado"
+                      value="1">
+                    <label class="btn btn-outline-primary" for="btnradio1">Activado</label>
+                    <input type="radio" class="btn-check" id="btnradio2" autocomplete="off" formControlName="estado"
+                      value="0">
+                    <label class="btn btn-outline-primary" for="btnradio2">Desactivado</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
