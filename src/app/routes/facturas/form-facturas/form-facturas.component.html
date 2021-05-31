@@ -40,12 +40,12 @@
                      <!-- Nombre -->
                      <div class="col-md-6 mb-3">
                         <div class="form-group">
-                           <label for="exampleSelect1" class="form-label">Cliente</label>
-                           <select class="form-select" id="exampleSelect1">
-                              <option value="1">Diego Torres</option>
-                              <option value="1">Diego Torres</option>
-                              <option value="1">Diego Torres</option>
-                           </select>
+                           <label class="form-label">Cliente</label>
+                           <div class="form-group">
+                              <ng-select2 [data]="exampleData" [width]="350" [(ngModel)]="id_cliente" name='id_cliente'
+                                 [allowClear]="true">
+                              </ng-select2>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -117,8 +117,9 @@
                   Detalle de Factura
                </div>
                <div class="col-6">
-                  <ngb-pagination [collectionSize]="detalleFactura.length" [(page)]="page" [maxSize]="10" [rotate]="true"
-                  [ellipses]="false" [boundaryLinks]="true" size="sm" class="d-flex justify-content-end"></ngb-pagination>
+                  <ngb-pagination [collectionSize]="detalleFactura.length" [(page)]="page" [maxSize]="10"
+                     [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
+                     class="d-flex justify-content-end"></ngb-pagination>
                </div>
             </div>
          </div>
