@@ -11,6 +11,7 @@ import { MovimientosFacturasComponent } from './movimientos-facturas/movimientos
 import { NgSelect2Module } from 'ng-select2';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     ClientesService,
-    NgbActiveModal
+    NgbActiveModal,
+    ServiciosService
   ]
 })
 export class FacturasModule { }

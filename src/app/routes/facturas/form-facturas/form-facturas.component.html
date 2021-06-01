@@ -135,10 +135,38 @@
                      <form>
                         <div class="form">
                            <div class="row">
-                              <!-- Serie -->
+                              <!-- Servicios -->
+                              <div class="col-md-3 mb-3">
+                                 <div class="form-group">
+                                    <label class="form-label">Servicio</label>
+                                    <div class="form-group">
+                                       <ng-select2 [data]="this.catalogoServicios" [width]="350" [(ngModel)]="id_servicio"
+                                          name='id_servicio' [theme]="bootstrap" [allowClear]="true">
+                                       </ng-select2>
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <!-- Cantidad -->
                               <div class="col-md-3">
                                  <div class="form-group mb-3">
-                                    <label class="form-label">Serie</label>
+                                    <label class="form-label">Cantidad</label>
+                                    <input type="text" class="form-control">
+                                 </div>
+                              </div>
+
+                              <!-- Descripcion -->
+                              <div class="col-md-3">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Descripcion</label>
+                                    <input type="text" class="form-control">
+                                 </div>
+                              </div>
+
+                              <!-- Monto -->
+                              <div class="col-md-3">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Monto</label>
                                     <input type="text" class="form-control">
                                  </div>
                               </div>
