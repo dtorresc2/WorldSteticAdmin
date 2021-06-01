@@ -12,6 +12,7 @@ import { NgSelect2Module } from 'ng-select2';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios
     NgbModule,
     FormsModule,
     NgSelect2Module,
+    SharedModule,
     HttpClientModule,
     FacturasRoutingModule
   ],
