@@ -27,31 +27,33 @@
                      </a>
                   </div>
                   <div class="card-body">
-                     <form>
+                     <form [formGroup]="this.formFactura">
                         <div class="form">
                            <div class="row">
                               <!-- Serie -->
                               <div class="col-md-3">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Serie</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="serie">
                                  </div>
                               </div>
 
+                              <!-- Numero de Factura -->
                               <div class="col-md-3">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Numero</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="numero_factura">
                                  </div>
                               </div>
 
-                              <!-- Nombre -->
+                              <!-- Cliente -->
                               <div class="col-md-6 mb-3">
                                  <div class="form-group">
                                     <label class="form-label">Cliente</label>
                                     <div class="form-group">
-                                       <ng-select2 [data]="this.catalogoClientes" [width]="350" [(ngModel)]="id_cliente"
-                                          name='id_cliente' [theme]="bootstrap" [allowClear]="true">
+                                       <ng-select2 [data]="this.catalogoClientes" [width]="350"
+                                          [formControl]="this.formFactura.get('cliente')" formControlName="cliente"
+                                          name='cliente' [allowClear]="true">
                                        </ng-select2>
                                     </div>
                                  </div>
@@ -63,15 +65,15 @@
                               <div class="col-md-6">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Nombre Factura</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="nombre_factura">
                                  </div>
                               </div>
 
-                              <!-- Nombre Factura -->
+                              <!-- Direccion Factura -->
                               <div class="col-md-6">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Direccion Factura</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="direccion_factura">
                                  </div>
                               </div>
                            </div>
@@ -81,21 +83,23 @@
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">NIT</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="nit">
                                  </div>
                               </div>
+
                               <!-- Telefono -->
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Telefono</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="telefono">
                                  </div>
                               </div>
+
                               <!-- Correo Electronico -->
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Fecha</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" class="form-control" formControlName="correo">
                                  </div>
                               </div>
                            </div>
@@ -105,16 +109,31 @@
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Saldo</label>
-                                    <input type="text" class="form-control" readonly>
+                                    <input type="text" class="form-control" formControlName="saldo" readonly>
                                  </div>
                               </div>
 
                               <!-- Estado del Cliente -->
-                              <div class="col-md-4">
+                              <div class="col-md-2">
                                  <div class="form-group mb-4">
                                     <label>Estado</label>
                                     <br>
                                     <span class="badge bg-success pb-1 mt-2">Activa</span>
+                                 </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                 <div class="form-group mb-3">
+                                    <label>Tipo Factura</label>
+                                    <br>
+                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                       <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
+                                          formControlName="credito" value="0">
+                                       <label class="btn btn-outline-primary" for="btnradio1">Contado</label>
+                                       <input type="radio" class="btn-check" id="btnradio2" autocomplete="off"
+                                          formControlName="credito" value="1">
+                                       <label class="btn btn-outline-primary" for="btnradio2">Credito</label>
+                                    </div>
                                  </div>
                               </div>
                            </div>
@@ -148,8 +167,9 @@
                                  <div class="form-group">
                                     <label class="form-label">Servicio</label>
                                     <div class="form-group">
-                                       <ng-select2 [data]="this.catalogoServicios" [width]="350" [(ngModel)]="id_servicio"
-                                          name='id_servicio' [theme]="bootstrap" [allowClear]="true">
+                                       <ng-select2 [data]="this.catalogoServicios" [width]="350"
+                                          [(ngModel)]="id_servicio" name='id_servicio' [theme]="bootstrap"
+                                          [allowClear]="true">
                                        </ng-select2>
                                     </div>
                                  </div>

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
+import { nitMatchValidator } from 'src/app/functions/validacionNit';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
+import { FacturaService } from 'src/app/services/facturas/factura.service';
 
 @Component({
   selector: 'app-form-facturas',
@@ -32,6 +34,8 @@ export class FormFacturasComponent implements OnInit {
 
   carga: boolean = false;
 
+  formFactura: FormGroup;
+
   public exampleData: Array<Select2OptionData>;
   public options: Options;
 
@@ -42,8 +46,25 @@ export class FormFacturasComponent implements OnInit {
     private router: Router,
     private activedRoute: ActivatedRoute,
     private clienteService: ClientesService,
-    private servicioService: ServiciosService
-  ) { }
+    private servicioService: ServiciosService,
+    private facturaService: FacturaService
+  ) {
+    this.formFactura = new FormGroup({
+      serie: new FormControl('', [Validators.required]),
+      numero_factura: new FormControl('', [Validators.required]),
+      nombre_factura: new FormControl('', [Validators.required]),
+      direccion_factura: new FormControl('', [Validators.required]),
+      nit: new FormControl('', [Validators.required]),
+      telefono: new FormControl('', []),
+      correo: new FormControl('', []),
+      saldo: new FormControl('', []),
+      estado: new FormControl('', [Validators.required]),
+      credito: new FormControl('', [Validators.required]),
+      cliente: new FormControl('', [Validators.required])
+    }, {
+      validators: nitMatchValidator
+    });
+  }
 
   async ngOnInit() {
     await this.obtenerCombos();
@@ -53,6 +74,8 @@ export class FormFacturasComponent implements OnInit {
     if (params.id) {
       this.modoEdicion = true;
       this.ID_FACTURA = params.id;
+
+      console.log(await this.facturaService.obtenerFactura(this.ID_FACTURA));
 
       // for (let i = 0; i < 25; i++) {
       //   this.detalleFactura.push({
@@ -71,7 +94,7 @@ export class FormFacturasComponent implements OnInit {
     }
   }
 
-  async obtenerCombos():Promise<boolean> {
+  async obtenerCombos(): Promise<boolean> {
     let listadoClientes = await this.clienteService.obtenerClientes();
     listadoClientes = listadoClientes.map(x => {
       let ID = x.ID_CLIENTE;

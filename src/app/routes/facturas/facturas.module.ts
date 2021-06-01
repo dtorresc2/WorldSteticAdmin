@@ -5,7 +5,7 @@ import { FacturasRoutingModule } from './facturas-routing.module';
 import { FacturasComponent } from './facturas/facturas.component';
 import { FormFacturasComponent } from './form-facturas/form-facturas.component';
 import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModule, NgbNav } from '@ng-bootstrap/ng-bootstrap';
 import { MovimientosFacturasComponent } from './movimientos-facturas/movimientos-facturas.component';
 import { NgSelect2Module } from 'ng-select2';
@@ -27,6 +27,7 @@ import { FacturaService } from 'src/app/services/facturas/factura.service';
     CommonModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     NgSelect2Module,
     SharedModule,
     HttpClientModule,
