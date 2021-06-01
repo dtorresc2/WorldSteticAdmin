@@ -1,9 +1,11 @@
-<ol class="breadcrumb bg-light">
+<app-loader *ngIf='!this.carga'></app-loader>
+
+<ol class="breadcrumb bg-light" *ngIf='this.carga'>
    <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
    <li class="breadcrumb-item active">Facturas</li>
 </ol>
 
-<div class="row">
+<div class="row" *ngIf='this.carga'>
    <div class="col-md-12">
       <div class="card border-light mb-3">
          <div class="card-header"><i class="fas fa-receipt" style="margin-right: 1%;"></i>
@@ -31,7 +33,7 @@
                         <th>Numero</th>
                         <th>Nit</th>
                         <th>Cliente</th>
-                        <th>Fecha</th>
+                        <th>Fecha Emision</th>
                         <th>Tipo Factura</th>
                         <th>Estado</th>
                         <th>Monto</th>
@@ -41,23 +43,23 @@
                   <tbody>
                      <tr *ngFor="let factura of facturas | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                         <td>{{factura.SERIE}}</td>
-                        <td>{{factura.NUMERO}}</td>
+                        <td>{{factura.NUMERO_FACTURA}}</td>
                         <td>{{factura.NIT}}</td>
-                        <td>{{factura.NOMBRE}}</td>
-                        <td>{{factura.FECHA}}</td>
+                        <td>{{factura.NOMBRE_FACTURA}}</td>
+                        <td>{{factura.FECHA_EMISION}}</td>
                         <td>
-                           <span *ngIf="factura.TIPO_FACTURA == '1'" class="badge bg-success pb-1">Contado</span>
-                           <span *ngIf="factura.TIPO_FACTURA == '0'" class="badge bg-info pb-1">Credito</span>
+                           <span *ngIf="factura.CONTADO_CREDITO == '1'" class="badge bg-success pb-1">Contado</span>
+                           <span *ngIf="factura.CONTADO_CREDITO == '0'" class="badge bg-info pb-1">Credito</span>
                         </td>
                         <td>
                            <span *ngIf="factura.ESTADO == '1'" class="badge bg-success pb-1">Activa</span>
                            <span *ngIf="factura.ESTADO == '0'" class="badge bg-danger pb-1">Anulada</span>
                         </td>
-                        <td>{{factura.MONTO}}</td>
+                        <td>{{factura.MONTO | number : '1.2-2'}}</td>
                         <td>
                            <div class="btn-group" role="group" aria-label="Basic example">
                               <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
-                                 (click)="editarFactura(factura.ID)">
+                                 (click)="editarFactura(factura.ID_FACTURA)">
                                  <i class="fas fa-pen"></i>
                               </button>
                               <button *ngIf="factura.TIPO_FACTURA == '0'" type="button" class="btn btn-primary btn-sm"

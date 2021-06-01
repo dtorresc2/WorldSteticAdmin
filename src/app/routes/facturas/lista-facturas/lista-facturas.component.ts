@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FacturaService } from 'src/app/services/facturas/factura.service';
 
 @Component({
   selector: 'app-lista-facturas',
@@ -12,36 +13,17 @@ export class ListaFacturasComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
+  carga: boolean = false;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private facturaService: FacturaService
   ) { }
 
   async ngOnInit() {
-    // for (let i = 0; i < 25; i++) {
-    //   this.facturas.push({
-    //     ID: (i + 1),
-    //     SERIE: "A",
-    //     NUMERO: (2 * i),
-    //     NOMBRE: "Diego Roberto Torres Claros",
-    //     NIT: "1232112312",
-    //     FECHA: "10/10/2020",
-    //     MONTO: 12.32,
-    //     ESTADO: 0,
-    //     TIPO_FACTURA: 1,
-    //   });
-
-    //   this.facturas.push({
-    //     ID: (i + 1),
-    //     SERIE: "A",
-    //     NUMERO: (2 * i),
-    //     NOMBRE: "Diego Roberto Torres Claros",
-    //     NIT: "1232112312",
-    //     FECHA: "10/10/2020",
-    //     MONTO: 12.32,
-    //     ESTADO: 1,
-    //     TIPO_FACTURA: 0,
-    //   });
-    // }
+    this.carga = false;
+    this.facturas = await this.facturaService.obtenerFacturas();
+    this.carga = true;
   }
 
   crearFactura() {

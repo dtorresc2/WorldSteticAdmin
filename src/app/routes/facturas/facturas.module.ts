@@ -13,6 +13,7 @@ import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.se
 import { HttpClientModule } from '@angular/common/http';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FacturaService } from 'src/app/services/facturas/factura.service';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   providers: [
     ClientesService,
     NgbActiveModal,
-    ServiciosService
+    ServiciosService,
+    FacturaService
   ]
 })
 export class FacturasModule { }

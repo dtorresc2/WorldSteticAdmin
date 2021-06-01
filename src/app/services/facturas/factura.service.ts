@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Factura } from 'src/app/models/factura';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,12 @@ export class FacturaService {
   ) { }
 
   obtenerFacturas(): Promise<any> {
+    let factura: Factura = {
+      ID_FACTURA: 0
+    };
+
     return new Promise((resolve, reject) => {
-      this.http.post(environment.API_URL + 'facturas/listar',{}).toPromise().then(
+      this.http.post(environment.API_URL + 'facturas/listar', factura).toPromise().then(
         res => {
           resolve(res);
         },

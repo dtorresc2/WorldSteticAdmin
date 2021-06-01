@@ -30,6 +30,8 @@ export class FormFacturasComponent implements OnInit {
 
   active = 1;
 
+  carga: boolean = false;
+
   public exampleData: Array<Select2OptionData>;
   public options: Options;
 
@@ -44,6 +46,9 @@ export class FormFacturasComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    await this.obtenerCombos();
+    this.carga = true;
+
     const params = this.activedRoute.snapshot.params;
     if (params.id) {
       this.modoEdicion = true;
@@ -64,7 +69,9 @@ export class FormFacturasComponent implements OnInit {
     else {
       this.modoEdicion = false;
     }
+  }
 
+  async obtenerCombos():Promise<boolean> {
     let listadoClientes = await this.clienteService.obtenerClientes();
     listadoClientes = listadoClientes.map(x => {
       let ID = x.ID_CLIENTE;
@@ -90,5 +97,6 @@ export class FormFacturasComponent implements OnInit {
     });
 
     this.catalogoServicios = listadoServicios;
+    return true;
   }
 }
