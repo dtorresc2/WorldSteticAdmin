@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
+import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 
 @Component({
   selector: 'app-form-facturas',
@@ -24,6 +25,10 @@ export class FormFacturasComponent implements OnInit {
   // public test = 'value-changed-1';
   id_cliente = '';
 
+  catalogoClientes = [];
+
+  active = 1;
+
   // public formControl = new FormControl();
   public exampleData: Array<Select2OptionData>;
   public options: Options;
@@ -33,33 +38,11 @@ export class FormFacturasComponent implements OnInit {
   cliente: FormGroup;
   constructor(
     private router: Router,
-    private activedRoute: ActivatedRoute
+    private activedRoute: ActivatedRoute,
+    private clienteService: ClientesService
   ) { }
 
-  ngOnInit(): void {
-    this.exampleData = [
-      {
-        id: 'opt1',
-        text: 'Options 1'
-      },
-      {
-        id: 'opt2',
-        text: 'Options 2'
-      },
-      {
-        id: 'opt3',
-        text: 'Options 3'
-      },
-      {
-        id: 'opt4',
-        text: 'Options 4'
-      }
-    ];
-
-    this.options = {
-      width: '300'
-    };
-
+  async ngOnInit() {
     const params = this.activedRoute.snapshot.params;
     if (params.id) {
       this.modoEdicion = true;
@@ -79,6 +62,19 @@ export class FormFacturasComponent implements OnInit {
     }
     else {
       this.modoEdicion = false;
+      let listadoClientes = await this.clienteService.obtenerClientes();
+      
+      listadoClientes = listadoClientes.map(x => {
+        let ID = x.ID_CLIENTE;
+        let TEXT = x.NOMBRE;
+  
+        return {
+          id: ID,
+          text : TEXT
+        }
+      });
+
+      this.catalogoClientes = listadoClientes;
     }
   }
 }

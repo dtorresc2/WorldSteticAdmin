@@ -6,9 +6,11 @@ import { FacturasComponent } from './facturas/facturas.component';
 import { FormFacturasComponent } from './form-facturas/form-facturas.component';
 import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
 import { FormsModule } from '@angular/forms';
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule, NgbNav } from '@ng-bootstrap/ng-bootstrap';
 import { MovimientosFacturasComponent } from './movimientos-facturas/movimientos-facturas.component';
 import { NgSelect2Module } from 'ng-select2';
+import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,9 +25,11 @@ import { NgSelect2Module } from 'ng-select2';
     NgbModule,
     FormsModule,
     NgSelect2Module,
+    HttpClientModule,
     FacturasRoutingModule
   ],
   providers: [
+    ClientesService,
     NgbActiveModal
   ]
 })

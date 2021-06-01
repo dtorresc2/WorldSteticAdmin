@@ -6,108 +6,215 @@
    <li *ngIf="this.modoEdicion" class="breadcrumb-item active">Editar Factura</li>
 </ol>
 
+
+<!-- <div class="row">
+
+</div> -->
+
 <div class="row">
    <div class="col-md-12">
-      <div class="card border-light mb-3">
-         <div class="card-header"><i class="fas fa-receipt" style="margin-right: 1%;"></i>
-            Encabezado de Factura
-            <button type="button" class="btn btn-success btn-sm" style="float: right">
-               <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
-            </button>
-            <a class="btn btn-primary btn-sm" style="float: right; margin-right: 1%;" routerLink="/facturas">
-               <i class="fas fa-arrow-left" style="padding-right: 3%;"></i> Salir
-            </a>
-         </div>
-         <div class="card-body">
-            <form>
-               <div class="form">
-                  <div class="row">
-                     <!-- Serie -->
-                     <div class="col-md-3">
-                        <div class="form-group mb-3">
-                           <label class="form-label">Serie</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div>
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+         <li [ngbNavItem]="1">
+            <a ngbNavLink>Encabezado</a>
+            <ng-template ngbNavContent>
+               <!-- Encabezado de Factura -->
+               <div class="card border-light mb-3">
+                  <div class="card-header"><i class="fas fa-receipt" style="margin-right: 1%;"></i>
+                     Encabezado de Factura
+                     <button type="button" class="btn btn-success btn-sm" style="float: right">
+                        <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
+                     </button>
+                     <a class="btn btn-primary btn-sm" style="float: right; margin-right: 1%;" routerLink="/facturas">
+                        <i class="fas fa-arrow-left" style="padding-right: 3%;"></i> Salir
+                     </a>
+                  </div>
+                  <div class="card-body">
+                     <form>
+                        <div class="form">
+                           <div class="row">
+                              <!-- Serie -->
+                              <div class="col-md-3">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Serie</label>
+                                    <input type="text" class="form-control">
+                                 </div>
+                              </div>
 
-                     <div class="col-md-3">
-                        <div class="form-group mb-3">
-                           <label class="form-label">Numero</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div>
+                              <div class="col-md-3">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Numero</label>
+                                    <input type="text" class="form-control">
+                                 </div>
+                              </div>
 
-                     <!-- Nombre -->
-                     <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                           <label class="form-label">Cliente</label>
-                           <div class="form-group">
-                              <ng-select2 [data]="exampleData" [width]="350" [(ngModel)]="id_cliente" name='id_cliente'
-                                 [allowClear]="true">
-                              </ng-select2>
+                              <!-- Nombre -->
+                              <div class="col-md-6 mb-3">
+                                 <div class="form-group">
+                                    <label class="form-label">Cliente</label>
+                                    <div class="form-group">
+                                       <ng-select2 [data]="this.catalogoClientes" [width]="350" [(ngModel)]="id_cliente"
+                                          name='id_cliente' [theme]="bootstrap" [allowClear]="true">
+                                       </ng-select2>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="row">
+                              <!-- Nit -->
+                              <div class="col-md-4">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">NIT</label>
+                                    <input type="text" class="form-control">
+                                 </div>
+                              </div>
+                              <!-- Telefono -->
+                              <div class="col-md-4">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Telefono</label>
+                                    <input type="text" class="form-control">
+                                 </div>
+                              </div>
+                              <!-- Correo Electronico -->
+                              <div class="col-md-4">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Direccion</label>
+                                    <input type="text" class="form-control">
+                                 </div>
+                              </div>
+
+                           </div>
+
+                           <div class="row">
+                              <div class="col-md-4">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Fecha</label>
+                                    <input type="text" class="form-control" readonly>
+                                 </div>
+                              </div>
+
+                              <!-- Saldo de Cliente -->
+                              <div class="col-md-4">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Saldo</label>
+                                    <input type="text" class="form-control" readonly>
+                                 </div>
+                              </div>
+
+                              <!-- Estado del Cliente -->
+                              <div class="col-md-4">
+                                 <div class="form-group mb-4">
+                                    <label>Estado</label>
+                                    <br>
+                                    <span class="badge bg-success pb-1 mt-2">Activa</span>
+                                 </div>
+                              </div>
                            </div>
                         </div>
+                     </form>
+                  </div>
+               </div>
+            </ng-template>
+         </li>
+         <li [ngbNavItem]="2">
+            <a ngbNavLink>Detalle</a>
+            <ng-template ngbNavContent>
+               <!-- Panel de Detalles -->
+               <div class="card border-light mb-3">
+                  <div class="card-header pt-2">
+                     <i class="fas fa-receipt" style="margin-right: 1%;"></i>
+                     Servicios
+                     <button type="button" class="btn btn-success btn-sm" style="float: right">
+                        <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
+                     </button>
+                     <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right: 1%;">
+                        <i class="fas fa-times"></i> Cancelar
+                     </button>
+                  </div>
+                  <div class="card-body">
+                     <form>
+                        <div class="form">
+                           <div class="row">
+                              <!-- Serie -->
+                              <div class="col-md-3">
+                                 <div class="form-group mb-3">
+                                    <label class="form-label">Serie</label>
+                                    <input type="text" class="form-control">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+
+               <!-- Detalle de Factura -->
+               <div class="card border-light mb-3">
+                  <div class="card-header pt-2">
+                     <div class="row">
+                        <div class="col-6">
+                           <i class="fas fa-receipt" style="margin-right: 1%;"></i>
+                           Detalle de Factura
+                        </div>
+                        <div class="col-6">
+                           <ngb-pagination [collectionSize]="detalleFactura.length" [(page)]="page" [maxSize]="10"
+                              [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
+                              class="d-flex justify-content-end"></ngb-pagination>
+                        </div>
                      </div>
                   </div>
-
-                  <div class="row">
-                     <!-- Nit -->
-                     <div class="col-md-4">
-                        <div class="form-group mb-3">
-                           <label class="form-label">NIT</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div>
-                     <!-- Telefono -->
-                     <div class="col-md-4">
-                        <div class="form-group mb-3">
-                           <label class="form-label">Telefono</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div>
-                     <!-- Correo Electronico -->
-                     <div class="col-md-4">
-                        <div class="form-group mb-3">
-                           <label class="form-label">Direccion</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div>
-
-                  </div>
-
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="form-group mb-3">
-                           <label class="form-label">Fecha</label>
-                           <input type="text" class="form-control" readonly>
-                        </div>
-                     </div>
-
-                     <!-- Saldo de Cliente -->
-                     <div class="col-md-4">
-                        <div class="form-group mb-3">
-                           <label class="form-label">Saldo</label>
-                           <input type="text" class="form-control" readonly>
-                        </div>
-                     </div>
-
-                     <!-- Estado del Cliente -->
-                     <div class="col-md-4">
-                        <div class="form-group mb-4">
-                           <label>Estado</label>
-                           <br>
-                           <span class="badge bg-success pb-1 mt-2">Activa</span>
-                        </div>
+                  <div class="card-body">
+                     <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-hover">
+                           <thead class="table-primary">
+                              <tr>
+                                 <th>No.</th>
+                                 <th>Codigo</th>
+                                 <th>Cantidad</th>
+                                 <th>Descripcion</th>
+                                 <th>Monto Unitario</th>
+                                 <th>Subtotal</th>
+                                 <th style="width: 120px;">Acciones</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr
+                                 *ngFor="let factura of detalleFactura | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                                 <td>{{factura.NUMERO}}</td>
+                                 <td>{{factura.CODIGO}}</td>
+                                 <td>{{factura.CANTIDAD}}</td>
+                                 <td>{{factura.DESCRIPCION}}</td>
+                                 <td>{{factura.MONTO_UNITARIO}}</td>
+                                 <td>{{factura.MONTO}}</td>
+                                 <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                       <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
+                                          (click)="editarFactura(factura.ID)">
+                                          <i class="fas fa-pen"></i>
+                                       </button>
+                                       <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
+                                          <i class="fas fa-trash"></i>
+                                       </button>
+                                    </div>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
                      </div>
                   </div>
                </div>
-            </form>
-         </div>
-      </div>
+            </ng-template>
+         </li>
+      </ul>
+
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+
    </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
    <div class="col-md-12">
       <div class="card border-light mb-3">
          <div class="card-header pt-2">
@@ -126,13 +233,6 @@
          <div class="card-body">
             <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
                <table class="table table-hover">
-                  <thead>
-                     <tr>
-                        <th colspan="9">
-
-                        </th>
-                     </tr>
-                  </thead>
                   <thead class="table-primary">
                      <tr>
                         <th>No.</th>
@@ -171,4 +271,4 @@
          </div>
       </div>
    </div>
-</div>
+</div> -->
