@@ -58,7 +58,6 @@ export class FormClientesComponent implements OnInit {
     }
   }
 
-
   rellenarFormulario(valores) {
     this.cliente.get('nombre').setValue((<any>valores).NOMBRE);
     this.cliente.get('direccion').setValue((<any>valores).DIRECCION);

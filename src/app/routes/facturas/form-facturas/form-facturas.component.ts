@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { nitMatchValidator } from 'src/app/functions/validacionNit';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
 import { FacturaService } from 'src/app/services/facturas/factura.service';
+import { FechaService } from 'src/app/services/utils/fecha.service';
 
 @Component({
   selector: 'app-form-facturas',
@@ -35,19 +37,21 @@ export class FormFacturasComponent implements OnInit {
   carga: boolean = false;
 
   formFactura: FormGroup;
+  formServicio: FormGroup;
 
   public exampleData: Array<Select2OptionData>;
   public options: Options;
 
   public formControl = new FormControl();
 
-  cliente: FormGroup;
   constructor(
     private router: Router,
     private activedRoute: ActivatedRoute,
     private clienteService: ClientesService,
     private servicioService: ServiciosService,
-    private facturaService: FacturaService
+    private facturaService: FacturaService,
+    private decimalPipe: DecimalPipe,
+    private fechaService: FechaService
   ) {
     this.formFactura = new FormGroup({
       serie: new FormControl('', [Validators.required]),
@@ -56,13 +60,20 @@ export class FormFacturasComponent implements OnInit {
       direccion_factura: new FormControl('', [Validators.required]),
       nit: new FormControl('', [Validators.required]),
       telefono: new FormControl('', []),
-      correo: new FormControl('', []),
       saldo: new FormControl('', []),
-      estado: new FormControl('', [Validators.required]),
+      estado: new FormControl({ value: '', disabled: true}, [Validators.required]),
       credito: new FormControl('', [Validators.required]),
-      cliente: new FormControl('', [Validators.required])
+      cliente: new FormControl('', [Validators.required]),
+      fecha: new FormControl('', [Validators.required])
     }, {
       validators: nitMatchValidator
+    });
+
+    this.formServicio = new FormGroup({
+      servicio: new FormControl('', [Validators.required]),
+      cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
+      descripcion: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
+      monto: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
     });
   }
 
@@ -74,8 +85,8 @@ export class FormFacturasComponent implements OnInit {
     if (params.id) {
       this.modoEdicion = true;
       this.ID_FACTURA = params.id;
-
-      console.log(await this.facturaService.obtenerFactura(this.ID_FACTURA));
+      this.rellenarFormulario(await this.facturaService.obtenerFactura(this.ID_FACTURA));
+      // console.log(await this.facturaService.obtenerFactura(this.ID_FACTURA));
 
       // for (let i = 0; i < 25; i++) {
       //   this.detalleFactura.push({
@@ -92,6 +103,21 @@ export class FormFacturasComponent implements OnInit {
     else {
       this.modoEdicion = false;
     }
+  }
+
+  rellenarFormulario(valores) {
+    this.formFactura.get('serie').setValue((<any>valores).SERIE);
+    this.formFactura.get('numero_factura').setValue((<any>valores).NUMERO_FACTURA);
+    this.formFactura.get('nombre_factura').setValue((<any>valores).NOMBRE_FACTURA);
+    this.formFactura.get('direccion_factura').setValue((<any>valores).DIRECCION_FACTURA);
+    this.formFactura.get('nit').setValue((<any>valores).NIT);
+    this.formFactura.get('telefono').setValue((<any>valores).TELEFONO);
+    this.formFactura.get('fecha').setValue(this.fechaService.fechaFormToBD((<any>valores).FECHA_EMISION));
+    this.formFactura.get('saldo').setValue(this.decimalPipe.transform((<any>valores).SALDO_ACTUAL, '1.2-2'));
+    this.formFactura.get('estado').setValue((<any>valores).ESTADO);
+    this.formFactura.get('credito').setValue((<any>valores).CONTADO_CREDITO);
+    this.formFactura.get('cliente').setValue((<any>valores).ID_CLIENTE);
+    this.carga = true;
   }
 
   async obtenerCombos(): Promise<boolean> {
@@ -121,5 +147,13 @@ export class FormFacturasComponent implements OnInit {
 
     this.catalogoServicios = listadoServicios;
     return true;
+  }
+
+  async selectService(event: string) {
+    // console.log(event);
+    let listadoServicios = await this.servicioService.obtenerServicio(event);
+    this.formServicio.get('descripcion').setValue((<any>listadoServicios).DESCRIPCION);
+    this.formServicio.get('monto').setValue(this.decimalPipe.transform((<any>listadoServicios).MONTO, '1.2-2'));
+    // console.log(listadoServicios);
   }
 }

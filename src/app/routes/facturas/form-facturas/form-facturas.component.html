@@ -34,7 +34,14 @@
                               <div class="col-md-3">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Serie</label>
-                                    <input type="text" class="form-control" formControlName="serie">
+                                    <input type="text" class="form-control" formControlName="serie" maxlength="45">
+                                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                                       Max: 45 caracteres
+                                     </span>
+                                     <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formFactura.get('serie').hasError('required') && (formFactura.get('serie').touched || formFactura.get('serie').dirty)">
+                                       Serie requerido
+                                     </span>
                                  </div>
                               </div>
 
@@ -83,7 +90,7 @@
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">NIT</label>
-                                    <input type="text" class="form-control" formControlName="nit">
+                                    <input type="text" class="form-control" formControlName="nit" readonly>
                                  </div>
                               </div>
 
@@ -91,15 +98,15 @@
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Telefono</label>
-                                    <input type="text" class="form-control" formControlName="telefono">
+                                    <input type="text" class="form-control" formControlName="telefono" readonly>
                                  </div>
                               </div>
 
-                              <!-- Correo Electronico -->
+                              <!-- Fecha -->
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Fecha</label>
-                                    <input type="date" class="form-control" formControlName="correo">
+                                    <input type="date" class="form-control" formControlName="fecha">
                                  </div>
                               </div>
                            </div>
@@ -118,7 +125,15 @@
                                  <div class="form-group mb-4">
                                     <label>Estado</label>
                                     <br>
-                                    <span class="badge bg-success pb-1 mt-2">Activa</span>
+                                    <!-- <span class="badge bg-success pb-1 mt-2">Activa</span> -->
+                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                       <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
+                                          formControlName="estado" value="1" >
+                                       <label class="btn btn-outline-primary" for="btnradio1">Activa</label>
+                                       <input type="radio" class="btn-check" id="btnradio2" autocomplete="off"
+                                          formControlName="estado" value="0" >
+                                       <label class="btn btn-outline-primary" for="btnradio2">Anulada</label>
+                                    </div>
                                  </div>
                               </div>
 
@@ -159,7 +174,7 @@
                      </button>
                   </div>
                   <div class="card-body">
-                     <form>
+                     <form [formGroup]="this.formServicio">
                         <div class="form">
                            <div class="row">
                               <!-- Servicios -->
@@ -168,26 +183,27 @@
                                     <label class="form-label">Servicio</label>
                                     <div class="form-group">
                                        <ng-select2 [data]="this.catalogoServicios" [width]="350"
-                                          [(ngModel)]="id_servicio" name='id_servicio' [theme]="bootstrap"
-                                          [allowClear]="true">
+                                          [formControl]="this.formServicio.get('servicio')" formControlName="servicio"
+                                          name='servicio' [theme]="bootstrap" [allowClear]="true"
+                                          (valueChanged)="selectService($event)">
                                        </ng-select2>
                                     </div>
                                  </div>
                               </div>
 
                               <!-- Cantidad -->
-                              <div class="col-md-3">
+                              <div class="col-md-2">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Cantidad</label>
-                                    <input type="number" class="form-control">
+                                    <input type="number" class="form-control" formControlName="cantidad">
                                  </div>
                               </div>
 
                               <!-- Descripcion -->
-                              <div class="col-md-3">
+                              <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Descripcion</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="descripcion">
                                  </div>
                               </div>
 
@@ -195,7 +211,7 @@
                               <div class="col-md-3">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Monto</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="monto">
                                  </div>
                               </div>
                            </div>
@@ -264,9 +280,6 @@
       </ul>
 
       <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
-
-
    </div>
 </div>
 

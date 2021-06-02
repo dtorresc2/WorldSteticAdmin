@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { FacturasRoutingModule } from './facturas-routing.module';
 import { FacturasComponent } from './facturas/facturas.component';
@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FacturaService } from 'src/app/services/facturas/factura.service';
+import { FechaService } from 'src/app/services/utils/fecha.service';
 
 
 @NgModule({
@@ -37,7 +38,9 @@ import { FacturaService } from 'src/app/services/facturas/factura.service';
     ClientesService,
     NgbActiveModal,
     ServiciosService,
-    FacturaService
+    FacturaService,
+    FechaService,
+    DecimalPipe
   ]
 })
 export class FacturasModule { }
