@@ -1,3 +1,5 @@
+import { FacturaDetalle } from "./facturaDetalle";
+
 export interface Factura {
    ID_FACTURA?: number;
    SERIE?: string;
@@ -12,4 +14,5 @@ export interface Factura {
    CONTADO_CREDITO?: number;
    ID_CLIENTE?: number;
    ID_USUARIO?: number;
+   DETALLE?: Array<FacturaDetalle>;
 }

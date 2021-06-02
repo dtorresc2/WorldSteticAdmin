@@ -101,7 +101,8 @@
                               <div class="col-md-6">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Direccion Factura</label>
-                                    <input type="text" class="form-control" formControlName="direccion_factura" maxlength="100">
+                                    <input type="text" class="form-control" formControlName="direccion_factura"
+                                       maxlength="100">
                                     <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
                                        Max: 100 caracteres
                                     </span>
@@ -119,6 +120,13 @@
                                  <div class="form-group mb-3">
                                     <label class="form-label">NIT</label>
                                     <input type="text" class="form-control" formControlName="nit" readonly>
+                                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                                       Max: 100 caracteres
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formFactura.get('direccion_factura').hasError('required') && (formFactura.get('direccion_factura').touched || formFactura.get('direccion_factura').dirty)">
+                                       Nombre requerido
+                                    </span>
                                  </div>
                               </div>
 
@@ -133,9 +141,13 @@
                               <!-- Fecha -->
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
-                                    <label class="form-label">Fecha</label>
+                                    <label class="form-label">Fecha de Emision</label>
                                     <input type="date" class="form-control" formControlName="fecha">
                                  </div>
+                                 <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="formFactura.get('fecha').hasError('required') && (formFactura.get('fecha').touched || formFactura.get('fecha').dirty)">
+                                    Fecha requerida
+                                 </span>
                               </div>
                            </div>
 
@@ -170,12 +182,12 @@
                                     <label>Tipo Factura</label>
                                     <br>
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                       <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
+                                       <input type="radio" class="btn-check" id="btnradio3" autocomplete="off"
                                           formControlName="credito" value="0">
-                                       <label class="btn btn-outline-primary" for="btnradio1">Contado</label>
-                                       <input type="radio" class="btn-check" id="btnradio2" autocomplete="off"
+                                       <label class="btn btn-outline-primary" for="btnradio3">Contado</label>
+                                       <input type="radio" class="btn-check" id="btnradio4" autocomplete="off"
                                           formControlName="credito" value="1">
-                                       <label class="btn btn-outline-primary" for="btnradio2">Credito</label>
+                                       <label class="btn btn-outline-primary" for="btnradio4">Credito</label>
                                     </div>
                                  </div>
                               </div>
@@ -215,6 +227,11 @@
                                           name='servicio' [theme]="bootstrap" [allowClear]="true"
                                           (valueChanged)="selectService($event)">
                                        </ng-select2>
+                                       <br>
+                                       <span class="text-danger" style="font-size: 10px;"
+                                          *ngIf="formServicio.get('servicio').hasError('required') && (formServicio.get('servicio').touched || formServicio.get('servicio').dirty)">
+                                          Cantidad requerida
+                                       </span>
                                     </div>
                                  </div>
                               </div>
@@ -223,7 +240,18 @@
                               <div class="col-md-2">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Cantidad</label>
-                                    <input type="number" class="form-control" formControlName="cantidad">
+                                    <input type="text" class="form-control" formControlName="cantidad" maxlength="10">
+                                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                                       Max: 10 caracteres
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formServicio.get('cantidad').hasError('required') && (formServicio.get('cantidad').touched || formServicio.get('cantidad').dirty)">
+                                       Cantidad requerida
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formServicio.get('cantidad').hasError('pattern') && (formServicio.get('cantidad').touched || formServicio.get('cantidad').dirty)">
+                                       Cantidad invalida
+                                    </span>
                                  </div>
                               </div>
 
@@ -231,7 +259,15 @@
                               <div class="col-md-4">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Descripcion</label>
-                                    <input type="text" class="form-control" formControlName="descripcion">
+                                    <input type="text" class="form-control" formControlName="descripcion"
+                                       maxlength="100">
+                                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                                       Max: 100 caracteres
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formServicio.get('descripcion').hasError('required') && (formServicio.get('descripcion').touched || formServicio.get('descripcion').dirty)">
+                                       Descripcion requerida
+                                    </span>
                                  </div>
                               </div>
 
@@ -239,7 +275,18 @@
                               <div class="col-md-3">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Monto</label>
-                                    <input type="text" class="form-control" formControlName="monto">
+                                    <input type="text" class="form-control" formControlName="monto" maxlength="10">
+                                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                                       Max: 10 caracteres
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formServicio.get('monto').hasError('required') && (formServicio.get('monto').touched || formServicio.get('monto').dirty)">
+                                       Monto requerido
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formServicio.get('monto').hasError('pattern') && (formServicio.get('monto').touched || formServicio.get('monto').dirty)">
+                                       Monto invalido
+                                    </span>
                                  </div>
                               </div>
                            </div>
@@ -306,66 +353,6 @@
             </ng-template>
          </li>
       </ul>
-
       <div [ngbNavOutlet]="nav" class="mt-2"></div>
    </div>
 </div>
-
-<!-- <div class="row">
-   <div class="col-md-12">
-      <div class="card border-light mb-3">
-         <div class="card-header pt-2">
-            <div class="row">
-               <div class="col-6">
-                  <i class="fas fa-receipt" style="margin-right: 1%;"></i>
-                  Detalle de Factura
-               </div>
-               <div class="col-6">
-                  <ngb-pagination [collectionSize]="detalleFactura.length" [(page)]="page" [maxSize]="10"
-                     [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
-                     class="d-flex justify-content-end"></ngb-pagination>
-               </div>
-            </div>
-         </div>
-         <div class="card-body">
-            <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
-               <table class="table table-hover">
-                  <thead class="table-primary">
-                     <tr>
-                        <th>No.</th>
-                        <th>Codigo</th>
-                        <th>Cantidad</th>
-                        <th>Descripcion</th>
-                        <th>Monto Unitario</th>
-                        <th>Subtotal</th>
-                        <th style="width: 120px;">Acciones</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr
-                        *ngFor="let factura of detalleFactura | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-                        <td>{{factura.NUMERO}}</td>
-                        <td>{{factura.CODIGO}}</td>
-                        <td>{{factura.CANTIDAD}}</td>
-                        <td>{{factura.DESCRIPCION}}</td>
-                        <td>{{factura.MONTO_UNITARIO}}</td>
-                        <td>{{factura.MONTO}}</td>
-                        <td>
-                           <div class="btn-group" role="group" aria-label="Basic example">
-                              <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
-                                 (click)="editarFactura(factura.ID)">
-                                 <i class="fas fa-pen"></i>
-                              </button>
-                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
-                                 <i class="fas fa-trash"></i>
-                              </button>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div>
-      </div>
-   </div>
-</div> -->

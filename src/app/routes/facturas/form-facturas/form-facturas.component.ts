@@ -72,7 +72,8 @@ export class FormFacturasComponent implements OnInit {
     this.formServicio = new FormGroup({
       servicio: new FormControl('', [Validators.required]),
       cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
-      descripcion: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
+      // descripcion: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]),
+      descripcion: new FormControl('', [Validators.required]),
       monto: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
     });
   }
