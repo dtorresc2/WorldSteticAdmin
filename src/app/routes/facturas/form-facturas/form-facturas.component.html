@@ -37,11 +37,11 @@
                                     <input type="text" class="form-control" formControlName="serie" maxlength="45">
                                     <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
                                        Max: 45 caracteres
-                                     </span>
-                                     <span class="text-danger" style="font-size: 10px;"
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
                                        *ngIf="formFactura.get('serie').hasError('required') && (formFactura.get('serie').touched || formFactura.get('serie').dirty)">
                                        Serie requerido
-                                     </span>
+                                    </span>
                                  </div>
                               </div>
 
@@ -49,7 +49,15 @@
                               <div class="col-md-3">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Numero</label>
-                                    <input type="text" class="form-control" formControlName="numero_factura">
+                                    <input type="text" class="form-control" formControlName="numero_factura"
+                                       maxlength="10">
+                                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                                       Max: 10 caracteres
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formFactura.get('numero_factura').hasError('required') && (formFactura.get('numero_factura').touched || formFactura.get('numero_factura').dirty)">
+                                       Numero requerido
+                                    </span>
                                  </div>
                               </div>
 
@@ -62,6 +70,11 @@
                                           [formControl]="this.formFactura.get('cliente')" formControlName="cliente"
                                           name='cliente' [allowClear]="true">
                                        </ng-select2>
+                                       <br>
+                                       <span class="text-danger" style="font-size: 10px;"
+                                          *ngIf="formFactura.get('cliente').hasError('required') && (formFactura.get('cliente').touched || formFactura.get('cliente').dirty)">
+                                          Cliente requerido
+                                       </span>
                                     </div>
                                  </div>
                               </div>
@@ -72,7 +85,15 @@
                               <div class="col-md-6">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Nombre Factura</label>
-                                    <input type="text" class="form-control" formControlName="nombre_factura">
+                                    <input type="text" class="form-control" formControlName="nombre_factura"
+                                       maxlength="100">
+                                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                                       Max: 100 caracteres
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formFactura.get('nombre_factura').hasError('required') && (formFactura.get('nombre_factura').touched || formFactura.get('nombre_factura').dirty)">
+                                       Nombre requerido
+                                    </span>
                                  </div>
                               </div>
 
@@ -80,7 +101,14 @@
                               <div class="col-md-6">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Direccion Factura</label>
-                                    <input type="text" class="form-control" formControlName="direccion_factura">
+                                    <input type="text" class="form-control" formControlName="direccion_factura" maxlength="100">
+                                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                                       Max: 100 caracteres
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                       *ngIf="formFactura.get('direccion_factura').hasError('required') && (formFactura.get('direccion_factura').touched || formFactura.get('direccion_factura').dirty)">
+                                       Nombre requerido
+                                    </span>
                                  </div>
                               </div>
                            </div>
@@ -128,10 +156,10 @@
                                     <!-- <span class="badge bg-success pb-1 mt-2">Activa</span> -->
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                        <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
-                                          formControlName="estado" value="1" >
+                                          formControlName="estado" value="1">
                                        <label class="btn btn-outline-primary" for="btnradio1">Activa</label>
                                        <input type="radio" class="btn-check" id="btnradio2" autocomplete="off"
-                                          formControlName="estado" value="0" >
+                                          formControlName="estado" value="0">
                                        <label class="btn btn-outline-primary" for="btnradio2">Anulada</label>
                                     </div>
                                  </div>
