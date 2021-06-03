@@ -6,6 +6,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
 import { nitMatchValidator } from 'src/app/functions/validacionNit';
+import { FacturaDetalle } from 'src/app/models/facturaDetalle';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
 import { FacturaService } from 'src/app/services/facturas/factura.service';
@@ -21,7 +22,7 @@ export class FormFacturasComponent implements OnInit {
   ID_FACTURA: any = 0;
   model: NgbDateStruct;
 
-  detalleFactura = [];
+  detalleFactura: Array<FacturaDetalle>;
   // Paginacion
   page = 1;
   pageSize = 5;
@@ -61,7 +62,7 @@ export class FormFacturasComponent implements OnInit {
       nit: new FormControl('', [Validators.required]),
       telefono: new FormControl('', []),
       saldo: new FormControl('', []),
-      estado: new FormControl({ value: '', disabled: true}, [Validators.required]),
+      estado: new FormControl({ value: '', disabled: true }, [Validators.required]),
       credito: new FormControl('', [Validators.required]),
       cliente: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required])
@@ -80,14 +81,16 @@ export class FormFacturasComponent implements OnInit {
 
   async ngOnInit() {
     await this.obtenerCombos();
-    this.carga = true;
+    // this.carga = true;
 
     const params = this.activedRoute.snapshot.params;
     if (params.id) {
       this.modoEdicion = true;
       this.ID_FACTURA = params.id;
-      this.rellenarFormulario(await this.facturaService.obtenerFactura(this.ID_FACTURA));
-      // console.log(await this.facturaService.obtenerFactura(this.ID_FACTURA));
+      this.rellenarFormulario(this.ID_FACTURA);
+      this.rellenarDetalle(this.ID_FACTURA);
+
+      // console.log(await this.facturaService.obtenerFacturaDetalle(this.ID_FACTURA));
 
       // for (let i = 0; i < 25; i++) {
       //   this.detalleFactura.push({
@@ -100,13 +103,32 @@ export class FormFacturasComponent implements OnInit {
       //     MONTO: 25.25,
       //   });
       // }
+
+      // BIEN_SERVICIO: "S"
+      // CANTIDAD: "2"
+      // DESCRIPCION: "Descripcion"
+      // ID_DETALLE: "1"
+      // ID_FACTURA: "8"
+      // ID_SERVICIO: "3"
+      // IVA: "3.03"
+      // MONTO: "25.25"
+      // MONTO_SIN_IVA: "22.544642857143"
+      // MONTO_UNITARIO: "5.25"
     }
     else {
+      this.formFactura.get('estado').setValue('1');
+      this.formFactura.get('credito').setValue('0');
+      this.formFactura.get('fecha').setValue(this.fechaService.fechaActual());
       this.modoEdicion = false;
     }
+
+    this.carga = true;
+
   }
 
-  rellenarFormulario(valores) {
+  async rellenarFormulario(id): Promise<boolean> {
+    let valores = await this.facturaService.obtenerFactura(id);
+
     this.formFactura.get('serie').setValue((<any>valores).SERIE);
     this.formFactura.get('numero_factura').setValue((<any>valores).NUMERO_FACTURA);
     this.formFactura.get('nombre_factura').setValue((<any>valores).NOMBRE_FACTURA);
@@ -118,7 +140,16 @@ export class FormFacturasComponent implements OnInit {
     this.formFactura.get('estado').setValue((<any>valores).ESTADO);
     this.formFactura.get('credito').setValue((<any>valores).CONTADO_CREDITO);
     this.formFactura.get('cliente').setValue((<any>valores).ID_CLIENTE);
-    this.carga = true;
+
+    return true;
+  }
+
+  async rellenarDetalle(id): Promise<boolean> {
+    // console.log(valores);
+    let valores = await this.facturaService.obtenerFacturaDetalle(id);
+    this.detalleFactura = valores;
+
+    return true;
   }
 
   async obtenerCombos(): Promise<boolean> {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment-timezone';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,10 @@ export class FechaService {
     let date = year1 + "-" + month1 + "-" + day1;
 
     return date;
+  }
+
+  fechaActual(): string {
+    let fecha = moment().tz("America/Guatemala").format('YYYY-MM-DD');
+    return fecha;
   }
 }

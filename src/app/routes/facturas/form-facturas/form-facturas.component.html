@@ -327,8 +327,8 @@
                            <tbody>
                               <tr
                                  *ngFor="let factura of detalleFactura | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-                                 <td>{{factura.NUMERO}}</td>
-                                 <td>{{factura.CODIGO}}</td>
+                                 <td>{{factura.ID_DETALLE}}</td>
+                                 <td>{{factura.ID_SERVICIO}}</td>
                                  <td>{{factura.CANTIDAD}}</td>
                                  <td>{{factura.DESCRIPCION}}</td>
                                  <td>{{factura.MONTO_UNITARIO}}</td>

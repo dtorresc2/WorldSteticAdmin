@@ -42,4 +42,20 @@ export class FacturaService {
         })
     });
   }
+
+  obtenerFacturaDetalle(id): Promise<any> {
+    let factura: Factura = {
+      ID_FACTURA: id
+    };
+
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas-detalle/listar', factura).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
 }
