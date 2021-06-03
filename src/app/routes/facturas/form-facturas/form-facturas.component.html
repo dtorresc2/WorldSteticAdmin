@@ -210,12 +210,10 @@
                         (click)='agregarServicio()'>
                         <i class="fas fa-plus" style="padding-right: 3%;"></i> Agregar
                      </button>
-                     <!-- <button type="submit" class="btn btn-success btn-sm" style="float: right">
-                        <i class="fas fa-plus" style="padding-right: 3%;"></i> Agregar
-                     </button> -->
-                     <!-- <button type="button" class="btn btn-danger btn-sm" style="float: right; margin-right: 1%;">
+                     <button *ngIf="this.modoEdicionServicio" type="button" class="btn btn-danger btn-sm"
+                        style="float: right; margin-right: 1%;" (click)='cancelar()'>
                         <i class="fas fa-times"></i> Cancelar
-                     </button> -->
+                     </button>
                   </div>
                   <div class="card-body">
                      <form [formGroup]="this.formServicio">
@@ -308,13 +306,31 @@
                            Detalle de Factura
                         </div>
                         <div class="col-6">
-                           <ngb-pagination [collectionSize]="detalleFactura.length" [(page)]="page" [maxSize]="this.pageSize"
-                              [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
-                              class="d-flex justify-content-end"></ngb-pagination>
+                           <ngb-pagination [collectionSize]="detalleFactura.length" [(page)]="page"
+                              [maxSize]="this.pageSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"
+                              size="sm" class="d-flex justify-content-end"></ngb-pagination>
                         </div>
                      </div>
                   </div>
                   <div class="card-body">
+                     <div class="form">
+                        <div class="row d-flex justify-content-end">
+                           <div class="col-md-2">
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Registros:</label>
+                                 <input type="text" class="form-control" readonly
+                                    [ngModel]="this.detalleFactura.length">
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Total:</label>
+                                 <input type="text" class="form-control" readonly [(ngModel)]="this.totalTexto">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
                      <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
                         <table class="table table-hover">
                            <thead class="table-primary">
@@ -330,20 +346,21 @@
                            </thead>
                            <tbody>
                               <tr
-                                 *ngFor="let factura of detalleFactura | slice: (page-1) * this.pageSize : (page-1) * this.pageSize + this.pageSize">
-                                 <td>{{factura.ID_DETALLE}}</td>
-                                 <td>{{factura.ID_SERVICIO}}</td>
-                                 <td>{{factura.CANTIDAD}}</td>
-                                 <td>{{factura.DESCRIPCION}}</td>
-                                 <td>{{factura.MONTO_UNITARIO | number : '1.2-2'}}</td>
-                                 <td>{{factura.MONTO | number : '1.2-2'}}</td>
+                                 *ngFor="let detalle of detalleFactura | slice: (page-1) * this.pageSize : (page-1) * this.pageSize + this.pageSize">
+                                 <td>{{detalle.ID_DETALLE}}</td>
+                                 <td>{{detalle.ID_SERVICIO}}</td>
+                                 <td>{{detalle.CANTIDAD}}</td>
+                                 <td>{{detalle.DESCRIPCION}}</td>
+                                 <td>{{detalle.MONTO_UNITARIO | number : '1.2-2'}}</td>
+                                 <td>{{detalle.MONTO | number : '1.2-2'}}</td>
                                  <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                        <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
-                                          (click)="editarFactura(factura.ID)">
+                                          (click)="editarServicio(this.detalleFactura.indexOf(detalle))">
                                           <i class="fas fa-pen"></i>
                                        </button>
-                                       <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
+                                       <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar"
+                                          (click)="eliminarServicio(this.detalleFactura.indexOf(detalle))">
                                           <i class="fas fa-trash"></i>
                                        </button>
                                     </div>
@@ -352,6 +369,7 @@
                            </tbody>
                         </table>
                      </div>
+
                   </div>
                </div>
             </ng-template>

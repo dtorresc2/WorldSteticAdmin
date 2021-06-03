@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Select2OptionData } from 'ng-select2';
+
 import { Options } from 'select2';
 import { nitMatchValidator } from 'src/app/functions/validacionNit';
 import { FacturaDetalle } from 'src/app/models/facturaDetalle';
@@ -20,6 +21,9 @@ import Swal from 'sweetalert2';
 })
 export class FormFacturasComponent implements OnInit {
   modoEdicion: boolean = false;
+  modoEdicionServicio: boolean = false;
+  indexDetalle = 0;
+
   ID_FACTURA: any = 0;
   model: NgbDateStruct;
 
@@ -40,6 +44,9 @@ export class FormFacturasComponent implements OnInit {
 
   formFactura: FormGroup;
   formServicio: FormGroup;
+
+  total: number = 0.00;
+  totalTexto;
 
   public exampleData: Array<Select2OptionData>;
   public options: Options;
@@ -123,7 +130,7 @@ export class FormFacturasComponent implements OnInit {
   async rellenarDetalle(id): Promise<boolean> {
     let valores = await this.facturaService.obtenerFacturaDetalle(id);
     this.detalleFactura = valores;
-
+    this.ajustarIndice();
     return true;
   }
 
@@ -166,7 +173,7 @@ export class FormFacturasComponent implements OnInit {
     if (!this.formServicio.invalid) {
       let monto: number = parseFloat(this.formServicio.get('monto').value) * parseFloat(this.formServicio.get('cantidad').value);
 
-      this.detalleFactura.push({
+      let detalle: FacturaDetalle = {
         ID_SERVICIO: this.formServicio.get('servicio').value,
         ID_FACTURA: 0,
         CANTIDAD: this.formServicio.get('cantidad').value,
@@ -174,12 +181,17 @@ export class FormFacturasComponent implements OnInit {
         DESCRIPCION: this.formServicio.get('descripcion').value,
         MONTO_UNITARIO: this.formServicio.get('monto').value,
         MONTO: monto
-      });
-
-      for (let i = 0; i < this.detalleFactura.length; i++) {
-        this.detalleFactura[i].ID_DETALLE = (i + 1);
       }
 
+      if (this.modoEdicionServicio) {
+        this.detalleFactura.splice(this.indexDetalle, 1, detalle);
+      }
+      else {
+        this.detalleFactura.push(detalle);
+      }
+
+      this.ajustarIndice();
+      this.cancelar();
     }
     else {
       Swal.fire({
@@ -191,5 +203,44 @@ export class FormFacturasComponent implements OnInit {
         showCloseButton: true
       });
     }
+  }
+
+  eliminarServicio(id) {
+    this.detalleFactura.splice(id, 1);
+    this.ajustarIndice();
+  }
+
+  editarServicio(id) {
+    this.indexDetalle = id;
+    this.modoEdicionServicio = true;
+
+    let detalle = this.detalleFactura[id];
+
+    setTimeout(() => {
+      this.formServicio.get('descripcion').setValue(detalle.DESCRIPCION);
+      this.formServicio.get('cantidad').setValue(detalle.CANTIDAD);
+      this.formServicio.get('monto').setValue(detalle.MONTO_UNITARIO);
+    }, 1000);
+
+  }
+
+  cancelar() {
+    this.modoEdicionServicio = false;
+    this.formServicio.get('servicio').setValue(0);
+    this.formServicio.get('descripcion').setValue('');
+    this.formServicio.get('cantidad').setValue(1);
+    this.formServicio.get('monto').setValue('');
+  }
+
+  ajustarIndice() {
+    this.total = 0;
+    let auxTotal: number = 0.00;
+
+    for (let i = 0; i < this.detalleFactura.length; i++) {
+      this.detalleFactura[i].ID_DETALLE = (i + 1);
+      auxTotal = auxTotal + (this.detalleFactura[i].MONTO * 1);
+    }
+
+    this.totalTexto = this.decimalPipe.transform(auxTotal, '1.2-2');
   }
 }
