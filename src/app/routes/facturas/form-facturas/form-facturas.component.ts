@@ -11,6 +11,7 @@ import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.se
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
 import { FacturaService } from 'src/app/services/facturas/factura.service';
 import { FechaService } from 'src/app/services/utils/fecha.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-facturas',
@@ -25,7 +26,7 @@ export class FormFacturasComponent implements OnInit {
   detalleFactura: Array<FacturaDetalle>;
   // Paginacion
   page = 1;
-  pageSize = 5;
+  pageSize = 10;
 
   id_cliente = '';
   id_servicio = '';
@@ -81,49 +82,24 @@ export class FormFacturasComponent implements OnInit {
 
   async ngOnInit() {
     await this.obtenerCombos();
-    // this.carga = true;
 
     const params = this.activedRoute.snapshot.params;
     if (params.id) {
       this.modoEdicion = true;
       this.ID_FACTURA = params.id;
-      this.rellenarFormulario(this.ID_FACTURA);
-      this.rellenarDetalle(this.ID_FACTURA);
-
-      // console.log(await this.facturaService.obtenerFacturaDetalle(this.ID_FACTURA));
-
-      // for (let i = 0; i < 25; i++) {
-      //   this.detalleFactura.push({
-      //     ID: (i + 1),
-      //     CODIGO: (2 * i),
-      //     NUMERO: (i + 1),
-      //     CANTIDAD: (i + 3),
-      //     DESCRIPCION: "Servicios 123123",
-      //     MONTO_UNITARIO: 5.25,
-      //     MONTO: 25.25,
-      //   });
-      // }
-
-      // BIEN_SERVICIO: "S"
-      // CANTIDAD: "2"
-      // DESCRIPCION: "Descripcion"
-      // ID_DETALLE: "1"
-      // ID_FACTURA: "8"
-      // ID_SERVICIO: "3"
-      // IVA: "3.03"
-      // MONTO: "25.25"
-      // MONTO_SIN_IVA: "22.544642857143"
-      // MONTO_UNITARIO: "5.25"
+      await this.rellenarFormulario(this.ID_FACTURA);
+      await this.rellenarDetalle(this.ID_FACTURA);
     }
     else {
       this.formFactura.get('estado').setValue('1');
       this.formFactura.get('credito').setValue('0');
       this.formFactura.get('fecha').setValue(this.fechaService.fechaActual());
+      this.detalleFactura = [];
       this.modoEdicion = false;
     }
 
+    this.formServicio.get('cantidad').setValue('1');
     this.carga = true;
-
   }
 
   async rellenarFormulario(id): Promise<boolean> {
@@ -145,7 +121,6 @@ export class FormFacturasComponent implements OnInit {
   }
 
   async rellenarDetalle(id): Promise<boolean> {
-    // console.log(valores);
     let valores = await this.facturaService.obtenerFacturaDetalle(id);
     this.detalleFactura = valores;
 
@@ -182,10 +157,39 @@ export class FormFacturasComponent implements OnInit {
   }
 
   async selectService(event: string) {
-    // console.log(event);
     let listadoServicios = await this.servicioService.obtenerServicio(event);
     this.formServicio.get('descripcion').setValue((<any>listadoServicios).DESCRIPCION);
     this.formServicio.get('monto').setValue(this.decimalPipe.transform((<any>listadoServicios).MONTO, '1.2-2'));
-    // console.log(listadoServicios);
+  }
+
+  agregarServicio() {
+    if (!this.formServicio.invalid) {
+      let monto: number = parseFloat(this.formServicio.get('monto').value) * parseFloat(this.formServicio.get('cantidad').value);
+
+      this.detalleFactura.push({
+        ID_SERVICIO: this.formServicio.get('servicio').value,
+        ID_FACTURA: 0,
+        CANTIDAD: this.formServicio.get('cantidad').value,
+        BIEN_SERVICIO: 'S',
+        DESCRIPCION: this.formServicio.get('descripcion').value,
+        MONTO_UNITARIO: this.formServicio.get('monto').value,
+        MONTO: monto
+      });
+
+      for (let i = 0; i < this.detalleFactura.length; i++) {
+        this.detalleFactura[i].ID_DETALLE = (i + 1);
+      }
+
+    }
+    else {
+      Swal.fire({
+        title: 'Facturas',
+        text: 'Campos vacios o incorrectos',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2a3848',
+        showCloseButton: true
+      });
+    }
   }
 }
