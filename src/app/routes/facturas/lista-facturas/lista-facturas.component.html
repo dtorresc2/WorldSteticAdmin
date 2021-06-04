@@ -48,8 +48,8 @@
                         <td>{{factura.NOMBRE_FACTURA}}</td>
                         <td>{{factura.FECHA_EMISION}}</td>
                         <td>
-                           <span *ngIf="factura.CONTADO_CREDITO == '1'" class="badge bg-success pb-1">Contado</span>
-                           <span *ngIf="factura.CONTADO_CREDITO == '0'" class="badge bg-info pb-1">Credito</span>
+                           <span *ngIf="factura.CONTADO_CREDITO == '0'" class="badge bg-success pb-1">Contado</span>
+                           <span *ngIf="factura.CONTADO_CREDITO == '1'" class="badge bg-info pb-1">Credito</span>
                         </td>
                         <td>
                            <span *ngIf="factura.ESTADO == '1'" class="badge bg-success pb-1">Activa</span>

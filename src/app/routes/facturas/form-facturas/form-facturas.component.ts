@@ -7,6 +7,7 @@ import { Select2OptionData } from 'ng-select2';
 
 import { Options } from 'select2';
 import { nitMatchValidator } from 'src/app/functions/validacionNit';
+import { Factura } from 'src/app/models/factura';
 import { FacturaDetalle } from 'src/app/models/facturaDetalle';
 import { ClientesService } from 'src/app/services/catalogos/clientes/clientes.service';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
@@ -169,6 +170,14 @@ export class FormFacturasComponent implements OnInit {
     this.formServicio.get('monto').setValue(this.decimalPipe.transform((<any>listadoServicios).MONTO, '1.2-2'));
   }
 
+  async selectCliente(event: string) {
+    let listadoClientes = await this.clienteService.obtenerCliente(event);
+    this.formFactura.get('nombre_factura').setValue((<any>listadoClientes).NOMBRE);
+    this.formFactura.get('direccion_factura').setValue((<any>listadoClientes).DIRECCION);
+    this.formFactura.get('nit').setValue((<any>listadoClientes).NIT);
+    this.formFactura.get('telefono').setValue((<any>listadoClientes).TELEFONO);
+  }
+
   agregarServicio() {
     if (!this.formServicio.invalid) {
       let monto: number = parseFloat(this.formServicio.get('monto').value) * parseFloat(this.formServicio.get('cantidad').value);
@@ -220,7 +229,7 @@ export class FormFacturasComponent implements OnInit {
       this.formServicio.get('descripcion').setValue(detalle.DESCRIPCION);
       this.formServicio.get('cantidad').setValue(detalle.CANTIDAD);
       this.formServicio.get('monto').setValue(detalle.MONTO_UNITARIO);
-    }, 1000);
+    }, 500);
 
   }
 
@@ -242,5 +251,84 @@ export class FormFacturasComponent implements OnInit {
     }
 
     this.totalTexto = this.decimalPipe.transform(auxTotal, '1.2-2');
+  }
+
+  async registrarFactura() {
+    if (!this.formFactura.invalid) {
+      let factura: Factura = {
+        ID_FACTURA: 0,
+        SERIE: this.formFactura.get('serie').value,
+        NUMERO_FACTURA: this.formFactura.get('numero_factura').value,
+        NOMBRE_FACTURA: this.formFactura.get('nombre_factura').value,
+        DIRECCION_FACTURA: this.formFactura.get('direccion_factura').value,
+        MONTO: this.totalTexto,
+        FECHA_EMISION: this.formFactura.get('fecha').value,
+        ESTADO: this.formFactura.get('estado').value,
+        CONTADO_CREDITO: this.formFactura.get('credito').value,
+        ID_CLIENTE: this.formFactura.get('cliente').value,
+        ID_USUARIO: 3,
+        DETALLE: this.detalleFactura
+      }
+
+      if (!this.modoEdicion) {
+        let respuesta = await this.facturaService.registrarFactura(factura);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Facturas',
+            text: 'Factura registrada correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          this.router.navigate(['facturas']);
+        }
+        else {
+          Swal.fire({
+            title: 'Facturas',
+            text: 'Fallo al registrar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
+      }
+      else {
+        factura.ID_FACTURA = this.ID_FACTURA;
+        let respuesta = await this.facturaService.actualizarFactura(factura);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Facturas',
+            text: 'Factura actualizada correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          this.router.navigate(['facturas']);
+        }
+        else {
+          Swal.fire({
+            title: 'Facturas',
+            text: 'Fallo al actualizar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
+      }
+    }
+    else {
+      Swal.fire({
+        title: 'Facturas',
+        text: 'Faltan campos o hay datos incorrectos',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2a3848',
+        showCloseButton: true
+      });
+    }
   }
 }

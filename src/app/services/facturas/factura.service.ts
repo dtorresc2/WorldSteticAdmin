@@ -58,4 +58,29 @@ export class FacturaService {
         })
     });
   }
+
+  registrarFactura(factura: Factura): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas/registrar', factura).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  actualizarFactura(factura: Factura): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas/actualizar', factura).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
 }

@@ -19,7 +19,7 @@
                <div class="card border-light mb-3">
                   <div class="card-header"><i class="fas fa-receipt" style="margin-right: 1%;"></i>
                      Encabezado de Factura
-                     <button type="button" class="btn btn-success btn-sm" style="float: right">
+                     <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="registrarFactura()">
                         <i class="fas fa-save" style="padding-right: 3%;"></i> Guardar
                      </button>
                      <a class="btn btn-primary btn-sm" style="float: right; margin-right: 1%;" routerLink="/facturas">
@@ -68,7 +68,7 @@
                                     <div class="form-group">
                                        <ng-select2 [data]="this.catalogoClientes" [width]="350"
                                           [formControl]="this.formFactura.get('cliente')" formControlName="cliente"
-                                          name='cliente' [allowClear]="true">
+                                          name='cliente' [allowClear]="true" (valueChanged)="selectCliente($event)">
                                        </ng-select2>
                                        <br>
                                        <span class="text-danger" style="font-size: 10px;"
