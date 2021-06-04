@@ -83,4 +83,49 @@ export class FacturaService {
     });
   }
 
+  eliminarFactura(id): Promise<any> {
+    let factura: Factura = {
+      ID_FACTURA: id
+    };
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas/eliminar', factura).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  anularFactura(id): Promise<any> {
+    let factura: Factura = {
+      ID_FACTURA: id
+    };
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas/anular', factura).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  habilitarFactura(id): Promise<any> {
+    let factura: Factura = {
+      ID_FACTURA: id
+    };
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas/habilitar', factura).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
 }

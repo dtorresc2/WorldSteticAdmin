@@ -9,7 +9,7 @@
    <div class="col-md-12">
       <div class="card border-light mb-3">
          <div class="card-header"><i class="fas fa-receipt" style="margin-right: 1%;"></i>
-            Listado de Facturas<a class="btn btn-link btn-sm" ngbTooltip="Actualizar"><i
+            Listado de Facturas<a class="btn btn-link btn-sm" ngbTooltip="Actualizar" (click)="obtenerFacturas()"><i
                   class="fas fa-sync-alt"></i></a>
             <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="crearFactura()">
                <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Factura
@@ -21,7 +21,7 @@
                   <thead>
                      <tr>
                         <td colspan="9">
-                           <ngb-pagination [collectionSize]="facturas.length" [(page)]="page" [maxSize]="10"
+                           <ngb-pagination [collectionSize]="facturas.length" [(page)]="page" [maxSize]="pageSize"
                               [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
                               class="d-flex justify-content-end"></ngb-pagination>
                         </td>
@@ -62,14 +62,20 @@
                                  (click)="editarFactura(factura.ID_FACTURA)">
                                  <i class="fas fa-pen"></i>
                               </button>
-                              <button *ngIf="factura.TIPO_FACTURA == '0'" type="button" class="btn btn-primary btn-sm"
-                                 ngbTooltip="Pagar" (click)="verMovimientos(factura.ID)">
+                              <button *ngIf="factura.CONTADO_CREDITO == '1'" type="button" class="btn btn-primary btn-sm"
+                                 ngbTooltip="Pagar" (click)="verMovimientos(factura.ID_FACTURA)">
                                  <i class="fas fa-money-bill-wave"></i>
                               </button>
-                              <button type="button" class="btn btn-warning btn-sm" ngbTooltip="Anular">
+                              <button *ngIf="factura.ESTADO == '1'" type="button" class="btn btn-warning btn-sm"
+                                 ngbTooltip="Anular" (click)="anularFactura(factura.ID_FACTURA)">
                                  <i class="fas fa-times"></i>
                               </button>
-                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
+                              <button *ngIf="factura.ESTADO == '0'" type="button" class="btn btn-primary btn-sm"
+                                 ngbTooltip="Habilitar" (click)="habilitarFactura(factura.ID_FACTURA)">
+                                 <i class="fas fa-check"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar"
+                                 (click)="eliminarFactura(factura.ID_FACTURA)">
                                  <i class="fas fa-trash"></i>
                               </button>
                            </div>
@@ -79,7 +85,7 @@
                   <tfoot>
                      <tr>
                         <td colspan="9">
-                           <ngb-pagination [collectionSize]="facturas.length" [(page)]="page" [maxSize]="10"
+                           <ngb-pagination [collectionSize]="facturas.length" [(page)]="page" [maxSize]="pageSize"
                               [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"
                               class="d-flex justify-content-end"></ngb-pagination>
                         </td>
