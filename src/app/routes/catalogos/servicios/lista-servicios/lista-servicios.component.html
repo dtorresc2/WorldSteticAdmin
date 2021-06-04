@@ -54,7 +54,7 @@
                                             (click)="editarServicio(servicio.ID_SERVICIO)">
                                             <i class="fas fa-pen "></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
+                                        <button *ngIf="servicio.NO_DETALLES == 0" type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
                                             (click)="eliminarServicio(servicio.ID_SERVICIO)">
                                             <i class="fas fa-trash "></i>
                                         </button>
