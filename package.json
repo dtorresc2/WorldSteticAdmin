@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve --configuration=dev",
+    "dev": "ng serve --prod --configuration=dev",
     "start": "serve -s dist/world-stetic-app",
-    "build": "ng build --prod",
+    "build": "ng build --prod --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng serve --prod --configuration=dev"
   },
   "private": true,
   "dependencies": {
