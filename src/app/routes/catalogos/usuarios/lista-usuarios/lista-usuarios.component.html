@@ -17,7 +17,23 @@
                <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Usuario
             </button>
          </div>
+
          <div class="card-body">
+            <form>
+               <div class="form-group">
+                  <div class="input-group">
+                     <input type="text" class="form-control" [(ngModel)]="this.filtro" placeholder="Usuario"
+                        placement="top" ngbTooltip="Filtro de Usuarios" name="filtro">
+                     <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button"
+                           style="padding-top: 7%; padding-bottom: 0%;">
+                           <label><i class="fas fa-search"></i></label>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+
             <div class="table-responsive">
                <table class="table table-hover">
                   <thead>
@@ -39,7 +55,8 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr *ngFor="let usuario of usuarios | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                     <tr
+                        *ngFor="let usuario of usuarios | filtroUsuarios:filtro |  slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                         <!-- <td>{{usuario.ID_USUARIO}}</td> -->
                         <td>{{usuario.USUARIO}}</td>
                         <td>
@@ -56,8 +73,8 @@
                                  (click)="editarUsuario(usuario.ID_USUARIO)">
                                  <i class="fas fa-pen "></i>
                               </button>
-                              <button *ngIf="usuario.NO_FACTURAS == 0" type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
-                                 (click)="eliminarUsuario(usuario.ID_USUARIO)">
+                              <button *ngIf="usuario.NO_FACTURAS == 0" type="button" class="btn btn-danger btn-sm pb-sm"
+                                 ngbTooltip="Eliminar" (click)="eliminarUsuario(usuario.ID_USUARIO)">
                                  <i class="fas fa-trash "></i>
                               </button>
                            </div>
