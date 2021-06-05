@@ -123,7 +123,7 @@ export class ListaFacturasComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        let respuesta = await this.facturaService.anularFactura(id);
+        let respuesta = await this.facturaService.habilitarFactura(id);
         if ((<any>respuesta.ESTADO == 1)) {
           Swal.fire({
             title: 'Facturas',

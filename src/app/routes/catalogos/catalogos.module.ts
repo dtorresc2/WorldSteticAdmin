@@ -20,6 +20,9 @@ import { FechaService } from 'src/app/services/utils/fecha.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios.service';
 import { UsuariosService } from 'src/app/services/catalogos/usuarios/usuarios.service';
+import { ClientesPipe } from 'src/app/pipes/clientes/clientes.pipe';
+import { ServiciosPipe } from 'src/app/pipes/servicios/servicios.pipe';
+import { UsuariosPipe } from 'src/app/pipes/usuarios/usuarios.pipe';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import { UsuariosService } from 'src/app/services/catalogos/usuarios/usuarios.se
     FormUsuariosComponent,
     ServiciosComponent,
     ListaServiciosComponent,
-    FormServiciosComponent
+    FormServiciosComponent,
+    ClientesPipe,
+    UsuariosPipe,
+    ServiciosPipe
   ],
   imports: [
     CommonModule,
