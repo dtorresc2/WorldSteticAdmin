@@ -18,6 +18,20 @@
                 </button>
             </div>
             <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="this.filtro"  placeholder="Nombre o NIT del cliente"
+                                placement="top" ngbTooltip="Filtro de Clientes" name="filtro">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="button"
+                                    style="padding-top: 7%; padding-bottom: 0%;">
+                                    <label><i class="fas fa-search"></i></label>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -41,7 +55,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let cliente of clientes | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                                *ngFor="let cliente of clientes | filtroClientes:filtro | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>{{cliente.ID_CLIENTE}}</td>
                                 <td>{{cliente.NOMBRE}}</td>
                                 <td>{{cliente.NIT}}</td>
@@ -56,7 +70,8 @@
                                             (click)="editarCliente(cliente.ID_CLIENTE)">
                                             <i class="fas fa-pen "></i>
                                         </button>
-                                        <button *ngIf="cliente.NO_FACTURAS == 0" type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
+                                        <button *ngIf="cliente.NO_FACTURAS == 0" type="button"
+                                            class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
                                             (click)="eliminarCliente(cliente.ID_CLIENTE)">
                                             <i class="fas fa-trash "></i>
                                         </button>

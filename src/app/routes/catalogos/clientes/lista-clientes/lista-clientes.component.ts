@@ -15,6 +15,8 @@ export class ListaClientesComponent implements OnInit {
   pageSize = 10;
   carga: boolean = false;
 
+  filtro: any = '';
+
   constructor(
     private router: Router,
     private clienteService: ClientesService

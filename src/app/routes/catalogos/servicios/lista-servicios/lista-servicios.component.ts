@@ -16,6 +16,8 @@ export class ListaServiciosComponent implements OnInit {
 
   carga: boolean = false;
 
+  filtro: any = '';
+
   constructor(
     private router: Router,
     private servicioServices: ServiciosService

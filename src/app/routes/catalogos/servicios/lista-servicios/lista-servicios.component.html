@@ -10,14 +10,29 @@
     <div class="col-md-12">
         <div class="card border-light mb-3">
             <div class="card-header"><i class="fas fa-concierge-bell" style="margin-right: 1%;"></i>
-                Listado de Servicios<a class="btn btn-link btn-sm" ngbTooltip="Actualizar" (click)="obtenerServicios()"><i
-                        class="fas fa-sync-alt"></i></a>
+                Listado de Servicios<a class="btn btn-link btn-sm" ngbTooltip="Actualizar"
+                    (click)="obtenerServicios()"><i class="fas fa-sync-alt"></i></a>
 
                 <button type="button" class="btn btn-success btn-sm" style="float: right" (click)="crearServicio()">
                     <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Servicio
                 </button>
             </div>
             <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="this.filtro"
+                                placeholder="Descripcion o monto del servicio" placement="top"
+                                ngbTooltip="Filtro de Clientes" name="filtro">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="button"
+                                    style="padding-top: 7%; padding-bottom: 0%;">
+                                    <label><i class="fas fa-search"></i></label>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -40,7 +55,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let servicio of servicios | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                                *ngFor="let servicio of servicios | filtroServicios:filtro | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>{{servicio.ID_SERVICIO}}</td>
                                 <td>{{servicio.DESCRIPCION}}</td>
                                 <td>{{servicio.MONTO | number : '1.2-2'}}</td>
@@ -54,7 +69,8 @@
                                             (click)="editarServicio(servicio.ID_SERVICIO)">
                                             <i class="fas fa-pen "></i>
                                         </button>
-                                        <button *ngIf="servicio.NO_DETALLES == 0" type="button" class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
+                                        <button *ngIf="servicio.NO_DETALLES == 0" type="button"
+                                            class="btn btn-danger btn-sm pb-sm" ngbTooltip="Eliminar"
                                             (click)="eliminarServicio(servicio.ID_SERVICIO)">
                                             <i class="fas fa-trash "></i>
                                         </button>
