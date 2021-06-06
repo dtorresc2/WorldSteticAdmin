@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompraService } from 'src/app/services/compras/compra.service';
 
 @Component({
   selector: 'app-costos',
@@ -11,17 +12,32 @@ export class CostosComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
-  constructor() { }
+  carga: boolean = false;
+  modoEdicion: boolean = false;
+  filtro: any = '';
 
-  ngOnInit(): void {
-    for (let i = 0; i < 25; i++) {
-      this.costos.push({
-        ID: (i + 1),
-        DESCRIPCION: "COSTO",
-        FECHA: "12/10/2020",
-        MONTO: 12.32
-      });
-    }
+  constructor(
+    private compraService: CompraService
+  ) { }
+
+  async ngOnInit() {
+    await this.obtenerCompras();
+    // console.log(await this.compraService.obtenerCompras());
+    // for (let i = 0; i < 25; i++) {
+    //   this.costos.push({
+    //     ID: (i + 1),
+    //     DESCRIPCION: "COSTO",
+    //     FECHA: "12/10/2020",
+    //     MONTO: 12.32
+    //   });
+    // }
+  }
+
+  async obtenerCompras(): Promise<boolean> {
+    this.carga = false;
+    this.costos = await this.compraService.obtenerCompras();
+    this.carga = true;
+    return true;
   }
 
 }
