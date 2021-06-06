@@ -15,6 +15,7 @@ export class ListaFacturasComponent implements OnInit {
   pageSize = 10;
 
   carga: boolean = false;
+  filtro: any = '';
 
   constructor(
     private router: Router,

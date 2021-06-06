@@ -19,6 +19,36 @@
             </button>
          </div>
          <div class="card-body">
+            <form>
+               <div class="row">
+                  <div class="col">
+                     <div class="form-group">
+                        <div class="input-group">
+                           <input type="text" class="form-control" [(ngModel)]="this.filtro"
+                              placeholder="Descripcion del movimiento" placement="top"
+                              ngbTooltip="Filtro de Movimientos" name="filtro">
+                           <div class="input-group-append">
+                              <button class="btn btn-outline-primary" type="button"
+                                 style="padding-top: 7%; padding-bottom: 0%;">
+                                 <label><i class="fas fa-search"></i></label>
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col">
+                     <div class="form-group">
+                        <!-- <label class="form-label">Movimiento</label> -->
+                        <select class="form-select" name="cargo_abono" [(ngModel)]="this.cargo_abono">
+                           <option value="">Todos</option>
+                           <option value="C">Cargo</option>
+                           <option value="A">Abono</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+            </form>
+
             <div class="table-responsive">
                <table class="table table-hover">
                   <thead>
@@ -42,7 +72,7 @@
                   </thead>
                   <tbody>
                      <tr
-                        *ngFor="let factura of movimientos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                        *ngFor="let factura of movimientos | filtroMovimientos:filtro:cargo_abono | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                         <td>
                            <span *ngIf="factura.CARGO_ABONO == 'C'" class="badge bg-success pb-1">Cargo</span>
                            <span *ngIf="factura.CARGO_ABONO == 'A'" class="badge bg-info pb-1">Abono</span>

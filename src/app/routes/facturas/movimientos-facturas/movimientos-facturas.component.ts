@@ -24,6 +24,8 @@ export class MovimientosFacturasComponent implements OnInit {
   movimiento: FormGroup;
 
   modoEdicion: boolean = false;
+  filtro: any = '';
+  cargo_abono: any = '';
 
   constructor(
     private router: Router,
