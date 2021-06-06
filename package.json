@@ -1,11 +1,12 @@
 {
   "name": "world-stetic-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve --prod --configuration=dev",
+    "prod": "ng serve --prod --configuration=production",
     "start": "serve -s dist/world-stetic-app",
-    "build": "ng build --prod --configuration=production",
+    "build": "ng build --prod --configuration=dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
