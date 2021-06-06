@@ -99,4 +99,21 @@ export class CompraService {
         })
     });
   }
+
+  eliminarCompra(id): Promise<any> {
+    let compra: Compra = {
+      ID_COMPRA: id
+    }
+
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'compras/eliminar', compra).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
 }

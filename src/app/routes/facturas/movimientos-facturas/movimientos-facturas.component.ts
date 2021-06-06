@@ -253,7 +253,7 @@ export class MovimientosFacturasComponent implements OnInit {
     });
   }
 
-  async eliminarFactura(id) {
+  async eliminarMovimiento(id) {
     Swal.fire({
       title: '¿Desea eliminar el movimiento?',
       text: "No se puede revertir esta accion.",

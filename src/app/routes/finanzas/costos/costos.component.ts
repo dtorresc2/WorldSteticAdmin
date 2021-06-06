@@ -228,4 +228,42 @@ export class CostosComponent implements OnInit {
       }
     });
   }
+
+  async eliminarCompra(id) {
+    Swal.fire({
+      title: '¿Desea eliminar la compra?',
+      text: "No se puede revertir esta accion.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#2a3848',
+      cancelButtonColor: '#dd4236',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let respuesta = await this.compraService.eliminarCompra(id);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Compras',
+            text: 'Compra eliminada correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          await this.obtenerCompras();
+        }
+        else {
+          Swal.fire({
+            title: 'Compras',
+            text: 'Fallo al eliminar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
+      }
+    });
+  }
 }

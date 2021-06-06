@@ -10,7 +10,7 @@
    <div class="col-md-12">
       <div class="card border-light mb-3">
          <div class="card-header"><i class="fas fa-wallet" style="margin-right: 1%;"></i>
-            Listado de Compras<a class="btn btn-link btn-sm" ngbTooltip="Actualizar">
+            Listado de Compras<a class="btn btn-link btn-sm" ngbTooltip="Actualizar" (click)="obtenerCompras()">
                <i class="fas fa-sync-alt"></i></a>
 
             <button type="button" class="btn btn-success btn-sm" style="float: right" data-toggle="modal"
@@ -63,7 +63,8 @@
                                  ngbTooltip="Anular" (click)="anularCompra(costo.ID_COMPRA)">
                                  <i class="fas fa-times"></i>
                               </button>
-                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
+                              <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar"
+                                 (click)="eliminarCompra(costo.ID_COMPRA)">
                                  <i class="fas fa-trash"></i>
                               </button>
                            </div>
