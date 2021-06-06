@@ -16,6 +16,22 @@
             </button>
          </div>
          <div class="card-body">
+            <form>
+               <div class="form-group">
+                   <div class="input-group">
+                       <input type="text" class="form-control" [(ngModel)]="this.filtro"
+                           placeholder="Nombre de factura, nit, serie" placement="top"
+                           ngbTooltip="Filtro de Facturas" name="filtro">
+                       <div class="input-group-append">
+                           <button class="btn btn-outline-primary" type="button"
+                               style="padding-top: 7%; padding-bottom: 0%;">
+                               <label><i class="fas fa-search"></i></label>
+                           </button>
+                       </div>
+                   </div>
+               </div>
+           </form>
+
             <div class="table-responsive">
                <table class="table table-hover">
                   <thead>
@@ -41,7 +57,7 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr *ngFor="let factura of facturas | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                     <tr *ngFor="let factura of facturas | filtroFacturas:filtro | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                         <td>{{factura.SERIE}}</td>
                         <td>{{factura.NUMERO_FACTURA}}</td>
                         <td>{{factura.NIT}}</td>

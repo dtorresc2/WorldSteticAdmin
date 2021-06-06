@@ -16,6 +16,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FacturaService } from 'src/app/services/facturas/factura.service';
 import { FechaService } from 'src/app/services/utils/fecha.service';
 import { MovimientoService } from 'src/app/services/facturas/movimiento.service';
+import { MovimientosPipe } from 'src/app/pipes/facturas/movimientos.pipe';
+import { FacturasPipe } from 'src/app/pipes/facturas/facturas.pipe';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { MovimientoService } from 'src/app/services/facturas/movimiento.service'
     FacturasComponent, 
     FormFacturasComponent,
     ListaFacturasComponent,
-    MovimientosFacturasComponent
+    MovimientosFacturasComponent,
+    FacturasPipe,
+    MovimientosPipe
   ],
   imports: [
     CommonModule,
