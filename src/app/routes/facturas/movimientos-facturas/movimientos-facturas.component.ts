@@ -218,7 +218,7 @@ export class MovimientosFacturasComponent implements OnInit {
 
   async habilitarMovimiento(id) {
     Swal.fire({
-      title: '¿Desea habilitar la movimiento?',
+      title: '¿Desea habilitar el movimiento?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#2a3848',

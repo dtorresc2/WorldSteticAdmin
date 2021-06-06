@@ -109,4 +109,123 @@ export class CostosComponent implements OnInit {
       });
     }
   }
+
+  async actualizarCompra() {
+    if (!this.compra.invalid) {
+      let compraAux: Compra = {
+        ID_COMPRA: this.ID_COMPRA,
+        DESCRIPCION: this.compra.get('descripcion').value,
+        MONTO: this.compra.get('monto').value,
+        ESTADO: this.compra.get('estado').value,
+        ID_USUARIO: 3,
+      }
+
+      let respuesta = await this.compraService.actualizarCompra(compraAux);
+      if ((<any>respuesta.ESTADO == 1)) {
+        Swal.fire({
+          title: 'Compras',
+          text: 'Compra actualizada correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2a3848',
+          showCloseButton: true
+        });
+      }
+      else {
+        Swal.fire({
+          title: 'Compras',
+          text: 'Fallo al actualizar',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2a3848',
+          showCloseButton: true
+        });
+      }
+      await this.obtenerCompras();
+    }
+    else {
+      Swal.fire({
+        title: 'Compras',
+        text: 'Faltan campos o hay datos incorrectos',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2a3848',
+        showCloseButton: true
+      });
+    }
+  }
+
+  async anularCompra(id) {
+    Swal.fire({
+      title: '¿Desea anular la compra?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#2a3848',
+      cancelButtonColor: '#dd4236',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let respuesta = await this.compraService.anularCompra(id);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Compras',
+            text: 'Compra anulada correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          await this.obtenerCompras();
+        }
+        else {
+          Swal.fire({
+            title: 'Compras',
+            text: 'Fallo al anular',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
+      }
+    });
+  }
+
+  async habilitarCompra(id) {
+    Swal.fire({
+      title: '¿Desea habilitar la compra?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#2a3848',
+      cancelButtonColor: '#dd4236',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let respuesta = await this.compraService.habilitarCompra(id);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Compras',
+            text: 'Compra habilitada correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          await this.obtenerCompras();
+        }
+        else {
+          Swal.fire({
+            title: 'Compras',
+            text: 'Fallo al habilitar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
+      }
+    });
+  }
 }

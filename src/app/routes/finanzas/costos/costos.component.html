@@ -56,11 +56,11 @@
                                  <i class="fas fa-pen"></i>
                               </button>
                               <button *ngIf="costo.ESTADO == '0'" type="button" class="btn btn-primary btn-sm"
-                                 ngbTooltip="Habilitar">
+                                 ngbTooltip="Habilitar" (click)="habilitarCompra(costo.ID_COMPRA)">
                                  <i class="fas fa-check"></i>
                               </button>
                               <button *ngIf="costo.ESTADO == '1'" type="button" class="btn btn-warning btn-sm"
-                                 ngbTooltip="Anular">
+                                 ngbTooltip="Anular" (click)="anularCompra(costo.ID_COMPRA)">
                                  <i class="fas fa-times"></i>
                               </button>
                               <button type="button" class="btn btn-danger btn-sm" ngbTooltip="Eliminar">
@@ -134,7 +134,7 @@
             <button *ngIf="!this.modoEdicion" type="button" class="btn btn-primary" data-dismiss="modal"
                (click)="registrarCompra()">Aceptar</button>
             <button *ngIf="this.modoEdicion" type="button" class="btn btn-primary" data-dismiss="modal"
-               (click)="actualizarMovimiento()" data-dismiss="modal">Actualizar</button>
+               (click)="actualizarCompra()" data-dismiss="modal">Actualizar</button>
          </div>
       </div>
    </div>

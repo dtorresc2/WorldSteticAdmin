@@ -56,4 +56,47 @@ export class CompraService {
     });
   }
 
+  actualizarCompra(movimiento: Compra): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'compras/actualizar', movimiento).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  anularCompra(id): Promise<any> {
+    let compra: Compra = {
+      ID_COMPRA: id
+    }
+
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'compras/anular', compra).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  habilitarCompra(id): Promise<any> {
+    let compra: Compra = {
+      ID_COMPRA: id
+    }
+
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'compras/habilitar', compra).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
 }
