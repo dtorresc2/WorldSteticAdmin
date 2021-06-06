@@ -19,6 +19,22 @@
             </button>
          </div>
          <div class="card-body">
+            <form>
+               <div class="form-group">
+                  <div class="input-group">
+                     <input type="text" class="form-control" [(ngModel)]="this.filtro"
+                        placeholder="Descripcion o monto de la compra" placement="top" ngbTooltip="Filtro de Compras"
+                        name="filtro">
+                     <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button"
+                           style="padding-top: 7%; padding-bottom: 0%;">
+                           <label><i class="fas fa-search"></i></label>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+
             <div class="table-responsive">
                <table class="table table-hover">
                   <thead>
@@ -41,7 +57,8 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr *ngFor="let costo of costos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                     <tr
+                        *ngFor="let costo of costos | filtroCompras:filtro | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                         <td>{{costo.FECHA}}</td>
                         <td>{{costo.DESCRIPCION}}</td>
                         <td>{{costo.MONTO | number : '1.2-2'}}</td>

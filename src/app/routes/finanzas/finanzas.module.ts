@@ -10,13 +10,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompraService } from 'src/app/services/compras/compra.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ComprasPipe } from 'src/app/pipes/compras/compras.pipe';
 
 
 @NgModule({
   declarations: [
     BalanceGeneralComponent,
     CostosComponent,
-    FinanzasComponent
+    FinanzasComponent,
+    ComprasPipe
   ],
   imports: [
     CommonModule,
