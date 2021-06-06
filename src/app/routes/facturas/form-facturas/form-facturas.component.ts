@@ -225,10 +225,12 @@ export class FormFacturasComponent implements OnInit {
 
     let detalle = this.detalleFactura[id];
 
+    this.formServicio.get('servicio').setValue(detalle.ID_SERVICIO);
+
     setTimeout(() => {
       this.formServicio.get('descripcion').setValue(detalle.DESCRIPCION);
       this.formServicio.get('cantidad').setValue(detalle.CANTIDAD);
-      this.formServicio.get('monto').setValue(detalle.MONTO_UNITARIO);
+      this.formServicio.get('monto').setValue(this.decimalPipe.transform(detalle.MONTO_UNITARIO, '1.2-2'));
     }, 500);
 
   }
