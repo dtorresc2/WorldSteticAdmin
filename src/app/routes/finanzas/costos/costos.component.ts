@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Compra } from 'src/app/models/compra';
 import { CompraService } from 'src/app/services/compras/compra.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-costos',
@@ -58,22 +59,54 @@ export class CostosComponent implements OnInit {
     this.compra.reset();
     this.ID_COMPRA = id;
 
-    // let aux = await this.movimientoService.obtenerMovimiento(this.ID_FACTURA, id);
     let aux = await this.compraService.obtenerCompra(this.ID_COMPRA)
     this.compra.get('descripcion').setValue((<any>aux).DESCRIPCION);
     this.compra.get('monto').setValue(this.decimalPipe.transform((<any>aux).MONTO, '1.2-2'));
     this.compra.get('estado').setValue((<any>aux).ESTADO);
+  }
 
-    // if (!this.compra.invalid) {
-    //   let compraAux: Compra = {
-    //     ID_FACTURA: this.ID_FACTURA,
-    //     CARGO_ABONO: this.movimiento.get('cargo_abono').value,
-    //     DESCRIPCION: this.movimiento.get('descripcion').value,
-    //     MONTO: this.movimiento.get('monto').value,
-    //     ESTADO: this.movimiento.get('estado').value,
-    //     ID_USUARIO: 3,
-    //   }
-    // }
+  async registrarCompra() {
+    if (!this.compra.invalid) {
+      let compraAux: Compra = {
+        ID_COMPRA: this.ID_COMPRA,
+        DESCRIPCION: this.compra.get('descripcion').value,
+        MONTO: this.compra.get('monto').value,
+        ESTADO: this.compra.get('estado').value,
+        ID_USUARIO: 3,
+      }
 
+      let respuesta = await this.compraService.registrarCompra(compraAux);
+      if ((<any>respuesta.ESTADO == 1)) {
+        Swal.fire({
+          title: 'Compras',
+          text: 'Compra registrada correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2a3848',
+          showCloseButton: true
+        });
+      }
+      else {
+        Swal.fire({
+          title: 'Compras',
+          text: 'Fallo al registrar',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2a3848',
+          showCloseButton: true
+        });
+      }
+      await this.obtenerCompras();
+    }
+    else {
+      Swal.fire({
+        title: 'Compras',
+        text: 'Faltan campos o hay datos incorrectos',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2a3848',
+        showCloseButton: true
+      });
+    }
   }
 }

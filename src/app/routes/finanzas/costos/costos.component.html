@@ -14,15 +14,12 @@
                <i class="fas fa-sync-alt"></i></a>
 
             <button type="button" class="btn btn-success btn-sm" style="float: right" data-toggle="modal"
-               data-target="#modalCostos">
-               <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Costo
+               data-target="#modalCostos" (click)="iniciarFormulario()">
+               <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Compra
             </button>
          </div>
          <div class="card-body">
             <div class="table-responsive">
-               <!-- <ngb-pagination [collectionSize]="costos.length" [(page)]="page" [maxSize]="pageSize" [rotate]="true"
-                  [ellipses]="false" [boundaryLinks]="true" size="sm" class="d-flex justify-content-end">
-               </ngb-pagination> -->
                <table class="table table-hover">
                   <thead>
                      <tr>
@@ -47,7 +44,7 @@
                      <tr *ngFor="let costo of costos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                         <td>{{costo.FECHA}}</td>
                         <td>{{costo.DESCRIPCION}}</td>
-                        <td>{{costo.MONTO}}</td>
+                        <td>{{costo.MONTO | number : '1.2-2'}}</td>
                         <td>
                            <span *ngIf="costo.ESTADO == '1'" class="badge bg-success pb-1">Activa</span>
                            <span *ngIf="costo.ESTADO == '0'" class="badge bg-danger pb-1">Anulada</span>
@@ -55,8 +52,7 @@
                         <td>
                            <div class="btn-group" role="group" aria-label="Basic example">
                               <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
-                                 data-toggle="modal" data-target="#modalCostos"
-                                 (click)="editarCompra(costo.ID_COMPRA)">
+                                 data-toggle="modal" data-target="#modalCostos" (click)="editarCompra(costo.ID_COMPRA)">
                                  <i class="fas fa-pen"></i>
                               </button>
                               <button *ngIf="costo.ESTADO == '0'" type="button" class="btn btn-primary btn-sm"
@@ -96,27 +92,49 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Costos</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Compras</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
          </div>
          <div class="modal-body">
-            <form>
+            <form [formGroup]="this.compra">
                <div class="form-group">
-                  <label for="exampleFormControlInput1">Descripcion</label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1"
-                     placeholder="Ingrese Descripcion">
+                  <label>Descripcion</label>
+                  <input type="text" class="form-control" formControlName="descripcion"
+                     placeholder="Ingrese Descripcion" maxlength="100">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                     Max: 100 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                     *ngIf="compra.get('descripcion').hasError('required') && (compra.get('descripcion').touched || compra.get('descripcion').dirty)">
+                     Descripción requerida
+                  </span>
                </div>
                <div class="form-group">
-                  <label for="exampleFormControlInput1">Monto</label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese Cantidad">
+                  <label>Monto</label>
+                  <input type="text" class="form-control" formControlName="monto" placeholder="Ingrese Cantidad"
+                     maxlength="10">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                     Max: 10 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                     *ngIf="compra.get('monto').hasError('required') && (compra.get('monto').touched || compra.get('monto').dirty)">
+                     Monto requerido
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                     *ngIf="compra.get('monto').hasError('pattern') && (compra.get('monto').touched || compra.get('monto').dirty)">
+                     Monto invalido
+                  </span>
                </div>
             </form>
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Aceptar</button>
+            <button *ngIf="!this.modoEdicion" type="button" class="btn btn-primary" data-dismiss="modal"
+               (click)="registrarCompra()">Aceptar</button>
+            <button *ngIf="this.modoEdicion" type="button" class="btn btn-primary" data-dismiss="modal"
+               (click)="actualizarMovimiento()" data-dismiss="modal">Actualizar</button>
          </div>
       </div>
    </div>
