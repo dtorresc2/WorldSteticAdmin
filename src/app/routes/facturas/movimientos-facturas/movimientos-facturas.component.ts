@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MovimientoService } from 'src/app/services/facturas/movimiento.service';
 
 @Component({
   selector: 'app-movimientos-facturas',
@@ -12,31 +13,25 @@ export class MovimientosFacturasComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
+  carga: boolean = false;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private activedRoute: ActivatedRoute,
+    private movimientoService: MovimientoService
   ) { }
 
-  ngOnInit(): void {
-    for (let i = 0; i < 25; i++) {
-      this.movimientos.push({
-        ID: (i + 1),
-        TIPO_MOVIMIENTO: 1,
-        NUMERO: (2 * i) + 1,
-        NOMBRE: "Diego Roberto Torres Claros",
-        FECHA: "10/10/2020",
-        MONTO: 12.32,
-        ESTADO: 0
-      });
-
-      this.movimientos.push({
-        ID: (i + 1),
-        TIPO_MOVIMIENTO: 0,
-        NUMERO: (2 * i) + 2,
-        NOMBRE: "Diego Roberto Torres Claros",
-        FECHA: "10/10/2020",
-        MONTO: 12.32,
-        ESTADO: 1
-      });
+  async ngOnInit() {
+    const params = this.activedRoute.snapshot.params;
+    if (params.id) {
+      await this.obtenerMovimientos(params.id);
     }
+  }
+
+  async obtenerMovimientos(id):Promise<boolean> {
+    this.carga = false;
+    this.movimientos = await this.movimientoService.obtenerMovimientos(id);
+    this.carga = true;
+    return false;
   }
 }

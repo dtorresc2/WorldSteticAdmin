@@ -15,6 +15,7 @@ import { ServiciosService } from 'src/app/services/catalogos/servicios/servicios
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FacturaService } from 'src/app/services/facturas/factura.service';
 import { FechaService } from 'src/app/services/utils/fecha.service';
+import { MovimientoService } from 'src/app/services/facturas/movimiento.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { FechaService } from 'src/app/services/utils/fecha.service';
     ServiciosService,
     FacturaService,
     FechaService,
-    DecimalPipe
+    DecimalPipe,
+    MovimientoService
   ]
 })
 export class FacturasModule { }

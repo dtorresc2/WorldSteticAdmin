@@ -12,9 +12,10 @@ export class MovimientoService {
     private http: HttpClient
   ) { }
 
-  obtenerMovimientos(): Promise<any> {
+  obtenerMovimientos(idFactura): Promise<any> {
     let movimiento: Movimiento = {
-      ID_FACTURA: 0
+      ID_FACTURA: idFactura,
+      ID_MOVIMIENTO: 0
     };
 
     return new Promise((resolve, reject) => {
