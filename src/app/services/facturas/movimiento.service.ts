@@ -28,4 +28,22 @@ export class MovimientoService {
         })
     });
   }
+
+  obtenerMovimiento(idFactura, idMovimiento): Promise<any> {
+    let movimiento: Movimiento = {
+      ID_FACTURA: idFactura,
+      ID_MOVIMIENTO: idMovimiento
+    };
+
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas-movimiento/listar', movimiento).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
 }

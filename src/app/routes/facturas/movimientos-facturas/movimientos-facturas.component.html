@@ -14,7 +14,7 @@
                <i class="fas fa-sync-alt"></i></a>
 
             <button type="button" class="btn btn-success btn-sm" style="float: right" data-toggle="modal"
-               data-target="#modalMovimientos">
+               data-target="#modalMovimientos" (click)="iniciarFormulario()">
                <i class="fas fa-plus" style="padding-right: 3%;"></i> Crear Movimiento
             </button>
          </div>
@@ -57,7 +57,8 @@
                         <td>
                            <div class="btn-group" role="group" aria-label="Basic example">
                               <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Editar"
-                                 data-toggle="modal" data-target="#modalMovimientos">
+                                 data-toggle="modal" data-target="#modalMovimientos"
+                                 (click)="editarMovimiento(factura.ID_MOVIMIENTO)">
                                  <i class="fas fa-pen"></i>
                               </button>
                               <button *ngIf="factura.ESTADO == '1'" type="button" class="btn btn-warning btn-sm"
@@ -103,21 +104,41 @@
             </button>
          </div>
          <div class="modal-body">
-            <form>
+            <form [formGroup]="this.movimiento">
                <div class="form-group">
-                  <label for="exampleSelect1" class="form-label">Movimiento</label>
-                  <select class="form-select" id="exampleSelect1">
+                  <label class="form-label">Movimiento</label>
+                  <select class="form-select" formControlName="cargo_abono">
                      <option value="C">Cargo</option>
                      <option value="A">Abono</option>
                   </select>
+                  <span class="text-danger" style="font-size: 10px;"
+                     *ngIf="movimiento.get('cargo_abono').hasError('required') && (movimiento.get('cargo_abono').touched || movimiento.get('cargo_abono').dirty)">
+                     Movimiento requerido
+                  </span>
                </div>
                <div class="form-group">
-                  <label for="contr1">Descripcion</label>
-                  <input type="text" class="form-control" id="contr1" placeholder="Ingrese Descripcion">
+                  <label>Descripcion</label>
+                  <input type="text" class="form-control" formControlName="descripcion"
+                     placeholder="Ingrese Descripcion" maxlength="100">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                     Max: 100 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                     *ngIf="movimiento.get('descripcion').hasError('required') && (movimiento.get('descripcion').touched || movimiento.get('descripcion').dirty)">
+                     Descripción requerida
+                  </span>
                </div>
                <div class="form-group">
-                  <label for="contr2">Monto</label>
-                  <input type="text" class="form-control" id="contr2" placeholder="Ingrese Cantidad">
+                  <label>Monto</label>
+                  <input type="text" class="form-control" formControlName="monto" placeholder="Ingrese Cantidad"
+                     maxlength="10">
+                  <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;">
+                     Max: 10 caracteres
+                  </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                     *ngIf="movimiento.get('monto').hasError('required') && (movimiento.get('monto').touched || movimiento.get('monto').dirty)">
+                     Monto requerido
+                  </span>
                </div>
             </form>
          </div>
