@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { FinanzasRoutingModule } from './finanzas-routing.module';
 import { BalanceGeneralComponent } from './balance-general/balance-general.component';
@@ -28,7 +28,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FinanzasRoutingModule,
   ],
   providers: [
-    CompraService
+    CompraService,
+    DecimalPipe
   ]
 })
 export class FinanzasModule { }

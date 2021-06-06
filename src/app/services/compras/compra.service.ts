@@ -28,4 +28,32 @@ export class CompraService {
     });
   }
 
+  obtenerCompra(id): Promise<any> {
+    let compra: Compra = {
+      ID_COMPRA: id
+    }
+
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'compras/listar', compra).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  registrarCompra(compra: Compra): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'compras/registrar', compra).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
 }
