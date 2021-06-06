@@ -46,4 +46,28 @@ export class MovimientoService {
     });
   }
 
+  registrarMovimiento(movimiento: Movimiento): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas-movimiento/registrar', movimiento).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  actualizarMovimiento(movimiento: Movimiento): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas-movimiento/actualizar', movimiento).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
 }

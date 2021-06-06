@@ -139,12 +139,19 @@
                      *ngIf="movimiento.get('monto').hasError('required') && (movimiento.get('monto').touched || movimiento.get('monto').dirty)">
                      Monto requerido
                   </span>
+                  <span class="text-danger" style="font-size: 10px;"
+                     *ngIf="movimiento.get('monto').hasError('pattern') && (movimiento.get('monto').touched || movimiento.get('monto').dirty)">
+                     Monto invalido
+                  </span>
                </div>
             </form>
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Aceptar</button>
+            <button *ngIf="!this.modoEdicion" type="button" class="btn btn-primary" (click)="registrarMovimiento()"
+               data-dismiss="modal">Registrar</button>
+            <button *ngIf="this.modoEdicion" type="button" class="btn btn-primary" (click)="actualizarMovimiento()"
+               data-dismiss="modal">Actualizar</button>
          </div>
       </div>
    </div>
