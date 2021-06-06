@@ -251,4 +251,41 @@ export class MovimientosFacturasComponent implements OnInit {
     });
   }
 
+  async eliminarFactura(id) {
+    Swal.fire({
+      title: '¿Desea eliminar el movimiento?',
+      text: "No se puede revertir esta accion.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#2a3848',
+      cancelButtonColor: '#dd4236',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let respuesta = await this.movimientoService.eliminarMovimiento(id);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Movimientos',
+            text: 'Movimiento eliminado correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          await this.obtenerMovimientos(this.ID_FACTURA);
+        }
+        else {
+          Swal.fire({
+            title: 'Movimientos',
+            text: 'Fallo al eliminar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
+      }
+    });
+  }
 }

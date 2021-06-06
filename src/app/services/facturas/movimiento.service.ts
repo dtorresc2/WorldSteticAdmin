@@ -90,7 +90,7 @@ export class MovimientoService {
     let movimiento: Movimiento = {
       ID_MOVIMIENTO: id
     };
-    
+
     return new Promise((resolve, reject) => {
       this.http.post(environment.API_URL + 'facturas-movimiento/habilitar', movimiento).toPromise().then(
         res => {
@@ -101,4 +101,21 @@ export class MovimientoService {
         })
     });
   }
+
+  eliminarMovimiento(id): Promise<any> {
+    let movimiento: Movimiento = {
+      ID_MOVIMIENTO: id
+    };
+
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas-movimiento/eliminar', movimiento).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
 }
