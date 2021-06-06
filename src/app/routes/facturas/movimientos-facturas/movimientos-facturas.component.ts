@@ -18,6 +18,7 @@ export class MovimientosFacturasComponent implements OnInit {
   pageSize = 10;
 
   ID_FACTURA: any = 0;
+  ID_MOVIMIENTO: any = 0;
 
   carga: boolean = false;
   movimiento: FormGroup;
@@ -56,6 +57,8 @@ export class MovimientosFacturasComponent implements OnInit {
   async editarMovimiento(id) {
     this.modoEdicion = true;
     this.movimiento.reset();
+    this.ID_MOVIMIENTO = id;
+
     let aux = await this.movimientoService.obtenerMovimiento(this.ID_FACTURA, id);
     this.movimiento.get('cargo_abono').setValue((<any>aux).CARGO_ABONO);
     this.movimiento.get('descripcion').setValue((<any>aux).DESCRIPCION);
@@ -128,10 +131,10 @@ export class MovimientosFacturasComponent implements OnInit {
     }
   }
 
-  async actualizarMovimiento(id) {
+  async actualizarMovimiento() {
     if (!this.movimiento.invalid) {
       let movimientoAux: Movimiento = {
-        ID_MOVIMIENTO: id,
+        ID_MOVIMIENTO: this.ID_MOVIMIENTO,
         CARGO_ABONO: this.movimiento.get('cargo_abono').value,
         DESCRIPCION: this.movimiento.get('descripcion').value,
         MONTO: this.movimiento.get('monto').value,
@@ -173,4 +176,79 @@ export class MovimientosFacturasComponent implements OnInit {
       });
     }
   }
+
+  async anularMovimiento(id) {
+    Swal.fire({
+      title: '¿Desea anular el movimiento?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#2a3848',
+      cancelButtonColor: '#dd4236',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let respuesta = await this.movimientoService.anularMovimiento(id);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Movimientos',
+            text: 'Movimiento anulado correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          await this.obtenerMovimientos(this.ID_FACTURA);
+        }
+        else {
+          Swal.fire({
+            title: 'Movimientos',
+            text: 'Fallo al anular',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
+      }
+    });
+  }
+
+  async habilitarMovimiento(id) {
+    Swal.fire({
+      title: '¿Desea habilitar la movimiento?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#2a3848',
+      cancelButtonColor: '#dd4236',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let respuesta = await this.movimientoService.habilitarMovimiento(id);
+        if ((<any>respuesta.ESTADO == 1)) {
+          Swal.fire({
+            title: 'Movimientos',
+            text: 'Movimiento habilitado correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+          await this.obtenerMovimientos(this.ID_FACTURA);
+        }
+        else {
+          Swal.fire({
+            title: 'Movimientos',
+            text: 'Fallo al habilitar',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2a3848',
+            showCloseButton: true
+          });
+        }
+      }
+    });
+  }
+
 }

@@ -149,7 +149,6 @@ export class ListaFacturasComponent implements OnInit {
     });
   }
 
-
   async obtenerFacturas(): Promise<boolean> {
     this.carga = false;
     this.facturas = await this.facturaService.obtenerFacturas();

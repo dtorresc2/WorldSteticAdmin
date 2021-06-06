@@ -70,4 +70,35 @@ export class MovimientoService {
     });
   }
 
+  anularMovimiento(id): Promise<any> {
+    let movimiento: Movimiento = {
+      ID_MOVIMIENTO: id
+    };
+
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas-movimiento/anular', movimiento).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
+
+  habilitarMovimiento(id): Promise<any> {
+    let movimiento: Movimiento = {
+      ID_MOVIMIENTO: id
+    };
+    
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.API_URL + 'facturas-movimiento/habilitar', movimiento).toPromise().then(
+        res => {
+          resolve(res);
+        },
+        msg => {
+          reject(msg);
+        })
+    });
+  }
 }
